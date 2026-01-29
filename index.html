@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sho exhibition</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 背景レイヤー -->
+  <div class="background">
+    <div class="color-bg"></div>
+  </div>
+
+  <!-- デモ用ボタン（あとで消してOK） -->
+  <div class="controls">
+    <button id="to-mono" onclick="location.href='monochrome.html'">暗い世界へ</button>
+  </div>
+
+  <!-- ページのメインタイトル -->
+  <h1>Sho Art Gellery</h1>
+
+  <!-- スクロールインジケーター -->
+  <div class="container_04">
+    <div class="scrollbar-text_04"><span>scroll</span></div>
+    <div class="scrollbar_04"></div>
+  </div>
+
+  <!-- ギャラリーセクション -->
+  <h2>Gallery</h2>
+  <div class="gallery">
+    <!-- 2024年のコレクション -->
+    <h3>2024 Collection</h3>
+    
+    <div class="art-collection">
+      <!-- 作品1 -->
+      <article class="art-piece">
+        <div class="art-image">
+          <div style="position: relative;">
+            <img src="images/2024/幻想蝶.jpg" alt="幻想蝶" class="clickable-image">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0);"></div>
+          </div>
+        </div>
+        <div class="art-info">
+          <h4 class="art-title">幻想蝶</h4>
+          <div class="art-subtitle">Fantasy butterfly</div>
+          <div class="art-description">
+            <p>この蝶は一人でのんびり過ごすのが好きらしい。特にこの紫陽花は居心地がいいと言っていた他にも紫陽花あるよと言っても絶対にこの紫陽花がいいと言った</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 作品2 -->
+      <article class="art-piece">
+        <div class="art-image">
+          <div style="position: relative;">
+            <img src="images/2024/幻想鯨.jpg" alt="幻想鯨" class="clickable-image">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0);"></div>
+          </div>
+        </div>
+        <div class="art-info">
+          <h4 class="art-title">幻想鯨</h4>
+          <div class="art-subtitle">Fantasy whale</div>
+          <div class="art-description">
+            <p>あの世界よりこの世界は楽しい。</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 作品3 -->
+      <article class="art-piece">
+        <div class="art-image">
+          <div style="position: relative;">
+            <img src="images/2024/あの日見た景色.jpg" alt="あの日見た景色" class="clickable-image">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0);"></div>
+          </div>
+        </div>
+        <div class="art-info">
+          <h4 class="art-title">あの日見た景色</h4>
+          <div class="art-subtitle">The scenery I saw that day</div>
+          <div class="art-description">
+            <p>あの船どこかで見た気がする。茶色の服を着た人と遊んだ時見たんだ。でもその船を見てから、茶色の服を着た人を見ないどこに行ったんだろう。猫みたいな性格で面白い人だったな。</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 作品4 -->
+      <article class="art-piece">
+        <div class="art-image">
+          <div style="position: relative;">
+            <img src="images/2024/感謝.jpg" alt="感謝" class="clickable-image">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0);"></div>
+          </div>
+        </div>
+        <div class="art-info">
+          <h4 class="art-title">感謝</h4>
+          <div class="art-subtitle">I owe you a lot</div>
+          <div class="art-description">
+            <p>母親への日々の感謝を表して描きました。</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 作品5 -->
+      <article class="art-piece">
+        <div class="art-image">
+          <div style="position: relative;">
+            <img src="images/2024/あの頃の鯨.jpg" alt="あの頃の鯨" class="clickable-image">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0);"></div>
+          </div>
+        </div>
+        <div class="art-info">
+          <h4 class="art-title">あの頃の鯨</h4>
+          <div class="art-subtitle">Whales of those days</div>
+          <div class="art-description">
+            <p>このまま海を登ったら違う世界に行けるって聞いたことがある。ほんとかな、とにかく行ってみよう</p>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- 2025年のコレクション -->
+    <h3>2025 Collection</h3>
+    <div class="art-collection">
+      <article class="art-piece">
+        <div class="art-image">
+          <div style="position: relative;">
+            <img src="images/2025/ミケ.jpg" alt="ミケ" class="clickable-image">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0);"></div>
+          </div>
+        </div>
+        <div class="art-info">
+          <h4 class="art-title">ミケ</h4>
+          <div class="art-subtitle">Mike</div>
+          <div class="art-description"><p>表情も行動も人みたいな猫だ。人が猫に変身してたりして。</p></div>
+        </div>
+      </article>
+
+      <article class="art-piece">
+        <div class="art-image">
+          <div style="position: relative;">
+            <img src="images/2025/愛しさ.jpg" alt="愛しさ" class="clickable-image">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0);"></div>
+          </div>
+        </div>
+        <div class="art-info">
+          <h4 class="art-title">愛しさ</h4>
+          <div class="art-subtitle">Love</div>
+          <div class="art-description"><p>あなたは僕にとって暖かくて愛しい人だ。僕から見ると君の背景も暖かく見えてしまう。</p></div>
+        </div>
+      </article>
+
+      <article class="art-piece">
+        <div class="art-image">
+          <div style="position: relative;">
+            <img src="images/2025/優しさ.jpg" alt="優しさ" class="clickable-image">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0);"></div>
+          </div>
+        </div>
+        <div class="art-info">
+          <h4 class="art-title">優しさ</h4>
+          <div class="art-subtitle">Kindness</div>
+          <div class="art-description"><p>この人は私にとって優しくて素敵な人だ。私から見ると君の背景も優しくて素敵なに見えてしまう。</p></div>
+        </div>
+      </article>
+
+      <article class="art-piece">
+        <div class="art-image">
+          <div style="position: relative;">
+            <img src="images/2025/思いやりに花を.jpg" alt="思いやりに花を" class="clickable-image">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0);"></div>
+          </div>
+        </div>
+        <div class="art-info">
+          <h4 class="art-title">思いやりに花を</h4>
+          <div class="art-subtitle">Flowers for consideration</div>
+          <div class="art-description"><p>この花に込めた想い伝わるかな。</p></div>
+        </div>
+      </article>
+
+      <article class="art-piece">
+        <div class="art-image">
+          <div style="position: relative;">
+            <img src="images/2025/深愛.jpg" alt="深愛" class="clickable-image">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0);"></div>
+          </div>
+        </div>
+        <div class="art-info">
+          <h4 class="art-title">深愛</h4>
+          <div class="art-subtitle">Deep love</div>
+          <div class="art-description"><p>母の日のプレゼントとして描きました。</p></div>
+        </div>
+      </article>
+
+      <article class="art-piece">
+        <div class="art-image">
+          <div style="position: relative;">
+            <img src="images/2025/優しい光.jpg" alt="優しい光" class="clickable-image">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0);"></div>
+          </div>
+        </div>
+        <div class="art-info">
+          <h4 class="art-title">優しい光</h4>
+          <div class="art-subtitle">Your kindness makes me shine</div>
+          <div class="art-description"><p>あの人を見つけるためにずっと1人で小さく静かに光っているクラゲが居た
+            今もずっと小さく光ってる。その光は静かで小さくても力強かった
+          </p></div>
+        </div>
+      </article>
+
+      <article class="art-piece">
+        <div class="art-image">
+          <div style="position: relative;">
+            <img src="images/2025/羽ばたくやさしい霧.jpg" alt="羽ばたくやさしい霧" class="clickable-image">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0);"></div>
+          </div>
+        </div>
+        <div class="art-info">
+          <h4 class="art-title">羽ばたくやさしい霧</h4>
+          <div class="art-subtitle">Gentle mist taking flight</div>
+          <div class="art-description"><p>霧が立ち込む森から美しい人が見えた。誰なのだろうか。</p></div>
+        </div>
+      </article>
+
+      <article class="art-piece">
+        <div class="art-image">
+          <div style="position: relative;">
+            <img src="images/2025/優しさに包まれた人へ.jpg" alt="優しさに包まれた人へ" class="clickable-image">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0);"></div>
+          </div>
+        </div>
+        <div class="art-info">
+          <h4 class="art-title">優しさに包まれた人へ</h4>
+          <div class="art-subtitle">For someone wrapped in kindness</div>
+          <div class="art-description"><p>優しさに包まれた人へプレゼントとして描きました。</p></div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- 画像拡大用モーダル -->
+  <div id="image-modal">
+    <img src="" alt="Expanded Image">
+  </div>
+
+</body>
+<script>
+  // 即時関数でスコープを限定（変数がグローバルを汚染しないようにする）
+  (function () {
+    const THRESHOLD = 20; // スクロール検知の閾値（ピクセル）。この値以上スクロールするとエフェクトが発動
+    
+    // スクロールイベント発生時に実行される関数
+    const onScroll = () => {
+      const scrolled = window.scrollY > THRESHOLD;
+      // bodyタグに 'scrolled' クラスを付け外しする（CSSのアニメーション制御用）
+      document.body.classList.toggle('scrolled', scrolled);
+    };
+    
+    // スクロール時とページ読み込み完了時に onScroll を実行
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('load', onScroll);
+
+    // --- 画像拡大機能 ---
+    const modal = document.getElementById('image-modal');
+    const modalImg = modal.querySelector('img');
+    // ギャラリー内のすべての画像を対象にする
+    const images = document.querySelectorAll('.art-image img.clickable-image');
+
+    images.forEach(img => {
+      // 画像の上に透明なオーバーレイがあるため、オーバーレイにクリックイベントを設定する
+      const overlay = img.nextElementSibling;
+      if (overlay) {
+        overlay.style.cursor = 'pointer'; // クリックできることを示すカーソル
+        overlay.addEventListener('click', (e) => {
+          e.stopPropagation(); // イベントのバブリング防止
+          modalImg.src = img.src; // クリックされた画像のパスをモーダルに設定
+          modal.style.display = 'flex'; // モーダルを表示
+        });
+      }
+    });
+
+    // モーダル（背景）をクリックしたら閉じる
+    modal.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+  })();
+</script>
+</html>

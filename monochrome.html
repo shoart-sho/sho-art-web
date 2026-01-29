@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sho exhibition - Nocturne</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap');
+
+    h1 {
+      font-family: 'Amatic SC', cursive;
+    }
+  </style>
+</head>
+<body class="Nocturne">
+  <!-- デモ用ボタン -->
+  <div class="controls">
+    <button onclick="location.href='index.html'">戻る</button>
+  </div>
+
+  <!-- ページのメインタイトル -->
+  <h1>Nocturne Gallery</h1>
+
+  <!-- スクロールインジケーター -->
+  <div class="container_04">
+    <div class="scrollbar-text_04"><span>scroll</span></div>
+    <div class="scrollbar_04"></div>
+  </div>
+
+  <!-- ギャラリーセクション -->
+
+    <h2 style="font-family: 'Amatic SC', cursive;">Gallery</h2>
+    
+    <div class="art-collection">
+      <!-- 作品1 -->
+      <article class="art-piece">
+        <div class="art-image">
+          <div style="position: relative;">
+            <img src="images/2025/暗影.jpg" alt="暗影" class="clickable-image">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0);"></div>
+          </div>
+        </div>
+        <div class="art-info">
+          <h4 class="art-title">暗影</h4>
+          <div class="art-subtitle">Fantasy butterfly</div>
+          <div class="art-description">
+            <p>古いブラウン管に写った映像、彼が誰でどこなのかわからない。</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 作品2 -->
+      <article class="art-piece">
+        <div class="art-image">
+          <div style="position: relative;">
+            <img src="images/2025/暗心.jpg" alt="暗心" class="clickable-image">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0);"></div>
+          </div>
+        </div>
+        <div class="art-info">
+          <h4 class="art-title">暗心</h4>
+          <div class="art-subtitle">Fantasy whale</div>
+          <div class="art-description">
+            <p>影はいつも誰かについて行って同じ動きをする、影も自由に動きたいと思っているのかもしれない。</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 作品3 -->
+      <article class="art-piece">
+        <div class="art-image">
+          <div style="position: relative;">
+            <img src="images/2025/深海映像.jpg" alt="深海映像" class="clickable-image">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0);"></div>
+          </div>
+        </div>
+        <div class="art-info">
+          <h4 class="art-title">深海映像</h4>
+          <div class="art-subtitle">Deep Sea Footage</div>
+          <div class="art-description">
+            <p>深海のように深く暗い世界を映す者</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 作品4 -->
+      <article class="art-piece">
+        <div class="art-image">
+          <div style="position: relative;">
+            <img src="images/2025/恋のパズル.jpg" alt="恋のパズル" class="clickable-image">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0);"></div>
+          </div>
+        </div>
+        <div class="art-info">
+          <h4 class="art-title">恋のパズル</h4>
+          <div class="art-subtitle">Love Puzzle</div>
+          <div class="art-description">
+            <p>暗い世界でも君を愛そう</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 作品5 -->
+      <article class="art-piece">
+        <div class="art-image">
+          <div style="position: relative;">
+            <img src="images/2025/404_not_found.jpg" alt="404 not found" class="clickable-image">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0);"></div>
+          </div>
+        </div>
+        <div class="art-info">
+          <h4 class="art-title">404 not found</h4>
+          <div class="art-subtitle">The being that existed until then</div>
+          <div class="art-description">
+            <p>いつの時代かわからない花片手に誰かを待つように壊れたロボット。</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- 画像拡大用モーダル -->
+  <div id="image-modal">
+    <img src="" alt="Expanded Image">
+  </div>
+
+</body>
+<script>
+  (function () {
+    const THRESHOLD = 20;
+    
+    const onScroll = () => {
+      const scrolled = window.scrollY > THRESHOLD;
+      document.body.classList.toggle('scrolled', scrolled);
+    };
+    
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('load', onScroll);
+
+    // --- 画像拡大機能 ---
+    const modal = document.getElementById('image-modal');
+    const modalImg = modal.querySelector('img');
+    const images = document.querySelectorAll('.art-image img.clickable-image');
+
+    images.forEach(img => {
+      const overlay = img.nextElementSibling;
+      if (overlay) {
+        overlay.style.cursor = 'pointer';
+        overlay.addEventListener('click', (e) => {
+          e.stopPropagation();
+          modalImg.src = img.src;
+          modal.style.display = 'flex';
+        });
+      }
+    });
+
+    modal.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+  })();
+</script>
+</html>
