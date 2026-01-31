@@ -12,10 +12,7 @@
     <div class="color-bg"></div>
   </div>
 
-  <!-- デモ用ボタン（あとで消してOK） -->
-  <div class="controls">
-    <button id="to-mono" onclick="location.href='monochrome.html'">暗い世界へ</button>
-  </div>
+
 
   <!-- ページのメインタイトル -->
   <h1>Sho Art Gellery</h1>
@@ -238,6 +235,235 @@
     </div>
   </div>
 
+<!-- ==========================================
+     Darkworld Experience Section
+     ダークファンタジーの世界観を表現するセクション
+     ========================================== -->
+<section id="darkworld-section">
+
+
+  
+  <!-- このセクション専用のスタイル -->
+  <style>
+    /* セクション全体のコンテナ */
+    #darkworld-section {
+      position: relative;
+      width: 100%;
+      min-height: 800px; /* 高さは適宜調整してください */
+      background: transparent;
+      color: #e0e0e0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden; /* はみ出したエフェクトを隠す */
+      font-family: 'Times New Roman', serif; /* ファンタジー感のあるフォント */
+    }
+
+    /* コンテンツ（画像とボタン）を包むラッパー */
+    .dw-content-wrapper {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      /* 初期状態：暗くする (40%) */
+      filter: brightness(40%);
+      /* 明るくなる時のアニメーション設定 (3秒かけてゆっくり) */
+      transition: filter 3s ease-in-out;
+    }
+
+    /* 明かりが灯った時のクラス (JSで付与) */
+    .dw-content-wrapper.is-lit {
+      /* 完全に明るくせず、少し雰囲気を残す (85%) */
+      filter: brightness(85%) sepia(20%);
+    }
+
+    /* 画像表示エリア */
+    .dw-image-container {
+      position: relative;
+      width: 600px;  /* 画像サイズに合わせて調整 */
+      height: 400px; /* 画像サイズに合わせて調整 */
+      margin: 0 auto 30px;
+      /* 画像の背景色を黒に設定（明かりがついても黒のまま維持されます） */
+      background-color: #ffffff;
+      box-shadow: none;
+      overflow: hidden;
+    }
+
+    /* 画像の共通スタイル */
+    .dw-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 2.5s ease-in-out; /* 画像の切り替えもゆっくり */
+    }
+
+    /* 明かりなし画像（初期表示） */
+    .img-no-light {
+      opacity: 0.9999; /* 完全な1だと切り替えがうまくいかない場合があるため微妙に下げる */
+      z-index: 2;
+    }
+
+    /* 明かりあり画像（初期は透明） */
+    .img-with-light {
+      opacity: 0;
+      z-index: 3;
+    }
+
+    /* 明かりが灯った時の画像の状態 */
+    .dw-content-wrapper.is-lit .img-no-light {
+      opacity: 0;
+    }
+    .dw-content-wrapper.is-lit .img-with-light {
+      opacity: 1;
+    }
+
+    /* アクションボタンのデザイン */
+    .dw-btn {
+      background: #ffffff;
+      border: 2px solid #ffffff;
+      color: #333333;
+      padding: 15px 40px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      cursor: pointer;
+      letter-spacing: 0.1em;
+      transition: all 0.5s ease;
+      font-family: inherit;
+      border-radius: 4px;
+    }
+
+    .dw-btn:hover {
+      background: #e6e6e6;
+      border-color: #e6e6e6;
+      color: #000;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    }
+
+    /* ボタンを非表示にするクラス */
+    .dw-btn.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* 
+       炎のエフェクト（画面端のゆらぎ）
+       初期状態は透明
+    */
+    .fire-effect-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none; /* クリックを邪魔しない */
+      z-index: 5;
+      opacity: 0;
+      transition: opacity 3s ease-in;
+      
+      /* 画面の内側に向かって影をつける（オレンジ色） */
+      box-shadow: inset 0 0 100px rgba(0,0,0,0.9); 
+    }
+
+    /* 明かりが灯った時に炎エフェクトを表示し、アニメーション開始 */
+    .fire-effect-overlay.active {
+      opacity: 1;
+      /* ゆらぎアニメーションの適用 */
+      animation: flickerAnimation 4s infinite alternate ease-in-out;
+    }
+
+    /* 炎のゆらぎアニメーション定義 */
+    @keyframes flickerAnimation {
+      0% {
+        box-shadow: inset 0 0 80px rgba(255, 100, 0, 0.1);
+      }
+      25% {
+        box-shadow: inset 0 0 120px rgba(255, 80, 0, 0.15);
+      }
+      50% {
+        box-shadow: inset 0 0 90px rgba(255, 120, 0, 0.12);
+      }
+      75% {
+        box-shadow: inset 0 0 130px rgba(255, 90, 0, 0.18);
+      }
+      100% {
+        box-shadow: inset 0 0 100px rgba(255, 100, 0, 0.1);
+      }
+    }
+  </style>
+
+  <!-- 炎のエフェクトレイヤー -->
+  <div class="fire-effect-overlay" id="fireOverlay"></div>
+
+  <!-- コンテンツエリア -->
+  <div class="dw-content-wrapper" id="contentWrapper">
+    <div class="dw-image-container">
+      <!-- 明かりなし画像 -->
+      <img src="darkworld.img/akarinasi.png" class="dw-image img-no-light" alt="明かりなし">
+      <!-- 明かりあり画像 -->
+      <img src="darkworld.img/akariari.png" class="dw-image img-with-light" alt="明かりあり">
+    </div>
+
+    <button class="dw-btn" id="lightBtn" type="button">
+      明かりを灯しますか？
+    </button>
+  </div>
+
+  <!-- 制御用JavaScript -->
+  <script>
+    // DOMの読み込みを待ってから実行（念のため）
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // 要素の取得
+      const lightBtn = document.getElementById('lightBtn');
+      const contentWrapper = document.getElementById('contentWrapper');
+      const fireOverlay = document.getElementById('fireOverlay');
+
+      // ボタンクリック時のイベントリスナー
+      lightBtn.addEventListener('click', () => {
+        
+        // 1. ボタンをフェードアウトさせて消す
+        lightBtn.classList.add('hidden');
+
+        // 2. コンテンツラッパーにクラスを追加
+        //    -> これによりCSSの brightness が変化し、画像がクロスフェードする
+        contentWrapper.classList.add('is-lit');
+
+        // 3. 炎のエフェクト（画面端のゆらぎ）を開始
+        fireOverlay.classList.add('active');
+
+        // ログ出力（デバッグ用）
+        console.log('Darkworld: 明かりが灯されました。');
+
+        // 3秒後にmonochrome.htmlへ遷移（演出が終わるのを待ってから移動）
+        setTimeout(() => {
+          window.location.href = 'monochrome.html';
+        }, 3000);
+      });
+
+      // 画像読み込みエラー時の自動修正（スペル揺れ対策）
+      document.querySelectorAll('.dw-image').forEach(img => {
+        img.onerror = function() {
+          // 無限ループ防止
+          if (this.dataset.retried) return;
+          this.dataset.retried = true;
+          
+          // akarinasi (si) でエラーなら akarinashi (shi) を試す
+          if (this.src.includes('akarinasi.png')) {
+            console.log('Retrying with akarinashi.png');
+            this.src = this.src.replace('akarinasi.png', 'akarinashi.png');
+          }
+        };
+      });
+    });
+  </script>
+</section>
+
+  
+
+  
+  
   <!-- 画像拡大用モーダル -->
   <div id="image-modal">
     <img src="" alt="Expanded Image">
@@ -278,7 +504,6 @@
         });
       }
     });
-
     // モーダル（背景）をクリックしたら閉じる
     modal.addEventListener('click', () => {
       modal.style.display = 'none';
