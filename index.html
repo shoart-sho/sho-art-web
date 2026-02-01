@@ -214,7 +214,69 @@
         </div>
         <div class="art-info">
           <h4 class="art-title">羽ばたくやさしい霧</h4>
-          <div class="art-subtitle">Gentle mist taking flight</div>
+          <div class="art-subtitle">Gentle mist taking flight</div><!DOCTYPE html>
+          <html lang="ja">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Akarinasi & Akariari 画像配置</title>
+              <style>
+                  /* 背景設定：透過が見やすいようにドット柄 */
+                  body {
+                      background-color: #f0f4f8;
+                      background-image: radial-gradient(#cbd5e0 1px, transparent 1px);
+                      background-size: 20px 20px;
+                      margin: 0;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      min-height: 100vh;
+                  }
+          
+                  /* 画像を並べるコンテナ */
+                  .image-container {
+                      display: flex;
+                      gap: 40px; /* 画像同士の間隔 */
+                      padding: 20px;
+                      flex-wrap: wrap; /* 画面が狭い場合に折り返す設定 */
+                      justify-content: center;
+                  }
+          
+                  /* 共通の画像スタイル */
+                  .character-img {
+                      width: 300px; /* 画像の幅 */
+                      height: auto; /* アスペクト比を維持 */
+                      
+                      /* 
+                         画像の輪郭（透明部分）に沿って影を落とす設定
+                         drop-shadow(X方向 Y方向 ぼかし 色)
+                      */
+                      filter: drop-shadow(8px 8px 12px rgba(0, 0, 0, 0.8));
+                      
+                      transition: transform 0.3s ease;
+                  }
+          
+                  /* ホバー時の動き */
+                  .character-img:hover {
+                      transform: scale(1.05);
+                      filter: drop-shadow(12px 12px 20px rgba(0, 0, 0, 0.6));
+                      cursor: pointer;
+                  }
+              </style>
+          </head>
+          <body>
+          
+              <div class="image-container">
+                  <!-- 1枚目: akarinasi -->
+                  <img src="akarinasi.png" alt="akarinasi" class="character-img">
+                  
+                  <!-- 2枚目: akariari -->
+                  <img src="akariari.png" alt="akariari" class="character-img">
+              </div>
+          
+          </body>
+          </html>
+          
           <div class="art-description"><p>霧が立ち込む森から美しい人が見えた。誰なのだろうか。</p></div>
         </div>
       </article>
