@@ -11,6 +11,69 @@
     h1 {
       font-family: 'Amatic SC', cursive;
     }
+
+    /* ERROR-404 Glitch Animation */
+    .glitch-identity {
+      position: relative;
+      display: inline-block;
+      font-family: 'Courier New', monospace; /* ロボット・システム的なフォント */
+    }
+
+    /* エマが一瞬現れるレイヤー */
+    .glitch-identity::before {
+      content: attr(data-alt);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000; /* 元の文字を隠すための背景色（ダークモード前提） */
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      z-index: 2;
+      pointer-events: none;
+      animation: identity-flash 12s infinite; /* 忘れた頃にやってくる不規則性 */
+    }
+
+    /* ノイズ・グリッチのレイヤー */
+    .glitch-identity::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      z-index: 1;
+      background: transparent;
+      text-shadow: 2px 0 rgba(255, 0, 0, 0.7), -2px 0 rgba(0, 255, 255, 0.7);
+      pointer-events: none;
+      animation: glitch-noise 5s infinite;
+    }
+
+    @keyframes identity-flash {
+      0%, 95% { opacity: 0; }
+      95.1% { opacity: 1; transform: skewX(20deg); }
+      95.3% { opacity: 1; transform: skewX(-20deg); }
+      95.5% { opacity: 1; transform: none; }
+      97% { opacity: 1; }
+      97.1% { opacity: 0; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes glitch-noise {
+      0%, 92% { opacity: 0; transform: translate(0); clip-path: inset(0 0 0 0); }
+      92.1% { opacity: 1; transform: translate(-2px, 1px); clip-path: inset(10% 0 50% 0); }
+      92.3% { opacity: 1; transform: translate(2px, -1px); clip-path: inset(60% 0 10% 0); }
+      92.5% { opacity: 0; transform: translate(0); }
+      96% { opacity: 0; }
+      96.1% { opacity: 0.8; transform: translate(1px, 0); clip-path: inset(0 0 0 0); }
+      96.3% { opacity: 0; }
+      100% { opacity: 0; }
+    }
   </style>
 </head>
 <body class="Nocturne">
@@ -113,7 +176,7 @@
           <h4 class="art-title">404 not found</h4>
           <div class="art-subtitle">The being that existed until then</div>
           <div class="art-description">
-            <p>いつの時代かわからない花片手に誰かを待つように壊れたロボット。</p>
+            <p>役目は終わった。それでも<span class="glitch-identity" data-text="ERROR-404" data-alt="エマ">ERROR-404</span>を守る処理は停止しなかった。</p>
           </div>
         </div>
       </article>
