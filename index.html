@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>sho exhibition</title>
   <link rel="stylesheet" href="style.css">
+ <link rel="icon" href="favicon.ico">
+<!-- PNGの場合 -->
+<link rel="icon" href="images/aikon/aikon.png" type="image/png">
+
+ <style>
+    @keyframes cat-walk-rl {
+      0% { right: 0; }
+      100% { right: 100%; transform: translateX(100%); }
+    }
+  </style>
 </head>
 <body>
   <!-- 背景レイヤー -->
@@ -127,7 +137,10 @@
           </div>
         </div>
         <div class="art-info">
-          <h4 class="art-title">ミケ</h4>
+          <h4 class="art-title" style="position: relative; display: inline-block;">
+            ミケ
+            <img src="images/neko/nekowalk1.gif" alt="cat" style="position: absolute; bottom: -3px; right: 0; height: 1em; animation: cat-walk-rl 10s linear infinite;">
+          </h4>
           <div class="art-subtitle">Mike</div>
           <div class="art-description"><p>表情も行動も人みたいな猫だ。人が猫に変身してたりして。</p></div>
         </div>
