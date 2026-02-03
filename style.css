@@ -213,7 +213,7 @@ body.scrolled h1 {
   font-weight: normal;
   letter-spacing: 0.05em;
   color: #000000;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #000;
   padding-bottom: 10px;
   display: inline-block;
 }
