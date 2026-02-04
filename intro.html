@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invitation</title>
+  <style>
+    /* --- ベーススタイル --- */
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #e6e6e6;
+      font-family: "Yu Mincho", "YuMincho", serif;
+      overflow: hidden;
+      cursor: default;
+      
+      /* グラデーションアニメーション背景 */
+      background: linear-gradient(-45deg, #000000, #1a1a2e, #16213e, #0f3460);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      
+      /* 初期状態 */
+      opacity: 1;
+      transition: opacity 2s ease;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* --- コンテンツ配置 --- */
+    .content-wrapper {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      width: 90%;
+      max-width: 600px;
+    }
+
+    /* --- テキストスタイル --- */
+    .text-line {
+      font-size: 1.1rem;
+      line-height: 2.6;
+      margin: 0;
+      /* タイプライター用に初期スタイル変更 */
+      opacity: 1;
+      transform: none;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+      
+      /* カーソル用 */
+      display: inline-block;
+      vertical-align: bottom;
+      min-height: 1.5em; /* 文字がないときも高さを確保 */
+    }
+
+    .spacer { height: 2.5rem; }
+
+    /* --- ボタンエリア --- */
+    .button-area {
+      margin-top: 5rem;
+      opacity: 0;
+      transition: opacity 2s ease;
+    }
+
+    .proceed-btn {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #ccc;
+      padding: 12px 40px;
+      font-family: inherit;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      cursor: pointer;
+      transition: all 0.8s ease;
+      border-radius: 2px;
+    }
+
+    .proceed-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: #fff;
+      color: #fff;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+
+    /* --- アニメーション制御 --- */
+    .visible { opacity: 1; transform: translateY(0); }
+
+    /* タイプライターのカーソル */
+    .typing {
+      border-right: 2px solid #e6e6e6;
+      animation: blink 0.8s step-end infinite;
+    }
+    @keyframes blink { 50% { border-color: transparent; } }
+    
+    /* ページ遷移時のフェードアウト用クラス */
+    body.fade-out {
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="content-wrapper">
+    <p class="text-line">ここは、</p>
+    <p class="text-line">招待状を受け取った方だけが通れる場所です。</p>
+    <div class="spacer"></div>
+    <p class="text-line">この場所で見たものは、</p>
+    <p class="text-line">だれにも言ってはいけません。</p>
+    <div class="spacer"></div>
+    <p class="text-line">それでも、進みますか？</p>
+
+    <div class="button-area" id="btnArea">
+      <button class="proceed-btn" id="enterBtn">進む</button>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('load', () => {
+      const lines = document.querySelectorAll('.text-line');
+      const btnArea = document.getElementById('btnArea');
+      const enterBtn = document.getElementById('enterBtn');
+
+      // テキスト内容を保存して空にする
+      const texts = Array.from(lines).map(line => line.textContent.trim());
+      lines.forEach(line => line.textContent = '');
+
+      // タイプライター風表示関数
+      const typeWriter = (element, text) => {
+        return new Promise(resolve => {
+          element.classList.add('typing'); // カーソル表示
+          let i = 0;
+          const speed = 100; // 打鍵速度(ms)
+
+          const interval = setInterval(() => {
+            element.textContent += text.charAt(i);
+            i++;
+            if (i >= text.length) {
+              clearInterval(interval);
+              element.classList.remove('typing'); // カーソル消去
+              resolve();
+            }
+          }, speed);
+        });
+      };
+
+      // 順番に実行する非同期関数
+      const startAnimation = async () => {
+        // 少し待ってから開始
+        await new Promise(r => setTimeout(r, 800));
+
+        for (let i = 0; i < lines.length; i++) {
+          await typeWriter(lines[i], texts[i]);
+          // 行間の待機時間
+          await new Promise(r => setTimeout(r, 400));
+        }
+
+        // 全て終わったらボタンを表示
+        btnArea.classList.add('visible');
+      };
+
+      startAnimation();
+
+      // ボタンクリック時の処理
+      enterBtn.addEventListener('click', () => {
+        // 1. 画面をフェードアウト
+        document.body.classList.add('fade-out');
+        
+        // 2. 2秒後にページ遷移
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 2000);
+      });
+    });
+  </script>
+</body>
+</html>
