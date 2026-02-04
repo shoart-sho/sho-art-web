@@ -1,4 +1,10 @@
-    // DOMの読み込みを待ってから実行（念のため）
+   
+   if (!localStorage.getItem('visited')) {
+  window.location.href = 'intro.html';
+}
+
+   
+   // DOMの読み込みを待ってから実行（念のため）
     document.addEventListener('DOMContentLoaded', () => {
       
       // 要素の取得
@@ -82,3 +88,5 @@
       modal.style.display = 'none';
     });
   })();
+
+  

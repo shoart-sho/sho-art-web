@@ -4,6 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Invitation</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="icon" href="images/aikon/aikon.png" type="image/png">
+
+  
+  <script>
+  
+    localStorage.setItem('visited', 'true');
+window.location.href = 'index.html';
+  </script>
+  <script>
+  // ページが読み込まれた時点でlocalStorageをチェックします。
+    // 'visited'キーの値が'true'の場合、招待状を表示せずに展示ページ(main.html)へリダイレクトします。
+    if (localStorage.getItem('visited') === 'true') {
+      window.location.href = 'index.html';
+    }
+  </script>
   <style>
     /* --- ベーススタイル --- */
     body {
@@ -167,15 +183,21 @@
 
       // ボタンクリック時の処理
       enterBtn.addEventListener('click', () => {
+        // localStorageに訪問記録を保存します。
+        localStorage.setItem('visited', 'true');
+
         // 1. 画面をフェードアウト
         document.body.classList.add('fade-out');
         
         // 2. 2秒後にページ遷移
         setTimeout(() => {
+          // 展示ページ(main.html)へ遷移します。
           window.location.href = 'index.html';
         }, 2000);
       });
     });
+
+
   </script>
 </body>
 </html>
