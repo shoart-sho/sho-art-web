@@ -9,6 +9,15 @@
 <!-- PNGの場合 -->
 <link rel="icon" href="images/aikon/aikon.png" type="image/png">
 
+ <script>
+    // セッションストレージを確認し、まだ訪問済みフラグがない場合は intro.html へリダイレクトします。
+    // localStorage ではなく sessionStorage を使うことで、ブラウザを閉じて再度開いたときに
+    // またイントロが表示されるようになります（何度でも入場演出が見られます）。
+    if (!sessionStorage.getItem('visited')) {
+      window.location.href = 'intro.html';
+    }
+ </script>
+
  <style>
     @keyframes cat-walk-rl {
       0% { right: 0; }
