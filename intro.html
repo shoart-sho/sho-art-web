@@ -103,14 +103,42 @@
     
     /* ページ遷移時のフェードアウト用クラス */
     body.fade-out {
-      opacity: 0;
+      /* opacity: 0; を削除し、カーテンアニメーションに任せます */
+    }
+
+    /* 上から下りてくるカーテン */
+    #curtain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background-color: #000; /* 画面を覆う色 */
+      z-index: 9999;
+      transition: height 1.8s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    body.fade-out #curtain {
+      height: 100%;
+    }
+
+    /* --- レスポンシブ対応 --- */
+    @media (max-width: 768px) {
+      .text-line {
+        font-size: 0.95rem;
+        line-height: 2.2;
+      }
+      .spacer {
+        height: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
   <div class="content-wrapper">
     <p class="text-line">ここは、</p>
-    <p class="text-line">招待状を受け取った方だけが通れる場所です。</p>
+    <p class="text-line">招待状を受け取った方だけが</p>
+    <p class="text-line">通れる場所です。</p>
     <div class="spacer"></div>
     <p class="text-line">この場所で見たものは、</p>
     <p class="text-line">だれにも言ってはいけません。</p>
@@ -120,6 +148,9 @@
     <div class="button-area" id="btnArea">
       <button class="proceed-btn" id="enterBtn">進む</button>
     </div>
+
+    <!-- 遷移アニメーション用のカーテン要素 -->
+    <div id="curtain"></div>
   </div>
 
   <script>
@@ -170,9 +201,8 @@
 
       // ボタンクリック時の処理
       enterBtn.addEventListener('click', () => {
-        // セッションストレージに訪問済みフラグを保存します。
-        // これにより、ブラウザを閉じない限りは再リダイレクトされませんが、ブラウザを開き直すと再度イントロが表示されます。
-        sessionStorage.setItem('visited', 'true');
+        // ローカルストレージに訪問済みフラグを保存します。（次回以降はイントロをスキップ）
+        localStorage.setItem('visited', 'true');
 
         // 1. 画面をフェードアウト
         document.body.classList.add('fade-out');
