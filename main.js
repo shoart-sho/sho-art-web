@@ -65,23 +65,70 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('load', onScroll);
 
+    // --- PCでの縦ホイール -> 横スクロール変換 ---
+    const galleryContainer = document.querySelector('.gallery-container');
+    if (galleryContainer) {
+      galleryContainer.addEventListener('wheel', (evt) => {
+        // スマホレイアウト（縦スクロール）のときは何もしない
+        if (window.innerWidth <= 768) return;
+
+        // 縦スクロール(deltaY)が発生している場合
+        if (evt.deltaY !== 0) {
+          evt.preventDefault();
+          galleryContainer.scrollLeft += evt.deltaY * 2.5;
+        }
+      }, { passive: false });
+    }
+
+    // --- スクロールヒントの制御 ---
+    const scrollHint = document.getElementById('scroll-hint');
+    if (scrollHint) {
+      // スマホ（縦）かPC（横）かでヒントのアニメーションを変える
+      const hintIcon = scrollHint.querySelector('.hint-icon');
+      if (window.innerWidth <= 768) {
+        // スマホ: 縦スクロールのヒント（上へスワイプ）
+        hintIcon.textContent = '↑';
+        hintIcon.style.animation = 'scrollAnimVertical 1.5s infinite';
+        // 縦アニメーションの定義を動的に追加
+        const style = document.createElement('style');
+        style.innerHTML = `
+          @keyframes scrollAnimVertical {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-30px); opacity: 0; }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+
+      // ユーザーがアクションしたらヒントを消す
+      const removeHint = () => {
+        scrollHint.classList.add('fade-out');
+        setTimeout(() => { scrollHint.style.display = 'none'; }, 500);
+        window.removeEventListener('wheel', removeHint);
+        window.removeEventListener('touchstart', removeHint);
+        window.removeEventListener('click', removeHint);
+      };
+
+      window.addEventListener('wheel', removeHint);
+      window.addEventListener('touchstart', removeHint);
+      window.addEventListener('click', removeHint);
+      // 3秒後にも自動で消す
+      setTimeout(removeHint, 3000);
+    }
+
     // --- 画像拡大機能 ---
     const modal = document.getElementById('image-modal');
     const modalImg = modal.querySelector('img');
     // ギャラリー内のすべての画像を対象にする
-    const images = document.querySelectorAll('.art-image img.clickable-image');
+    const images = document.querySelectorAll('img.clickable-image');
 
     images.forEach(img => {
-      // 画像の上に透明なオーバーレイがあるため、オーバーレイにクリックイベントを設定する
-      const overlay = img.nextElementSibling;
-      if (overlay) {
-        overlay.style.cursor = 'pointer'; // クリックできることを示すカーソル
-        overlay.addEventListener('click', (e) => {
-          e.stopPropagation(); // イベントのバブリング防止
-          modalImg.src = img.src; // クリックされた画像のパスをモーダルに設定
-          modal.style.display = 'flex'; // モーダルを表示
-        });
-      }
+      img.style.cursor = 'pointer'; // クリックできることを示すカーソル
+      img.addEventListener('click', (e) => {
+        e.stopPropagation(); // イベントのバブリング防止
+        modalImg.src = img.src; // クリックされた画像のパスをモーダルに設定
+        modal.style.display = 'flex'; // モーダルを表示
+      });
     });
     // モーダル（背景）をクリックしたら閉じる
     modal.addEventListener('click', () => {

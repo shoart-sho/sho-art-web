@@ -1,0 +1,12 @@
+sho-art-web/
+├── index.html       (本来はここが入口ですが、今回は intro.html を入口とします)
+├── intro.html       (今回作成：入口ページ・招待状)
+├── gallery.html     (次回作成：メイン展示・回廊)
+├── style.css        (全体のデザインを管理するファイル)
+├── script.js        (動きを管理するファイル)
+└── images/          (画像フォルダ)
+    ├── intro/       (入口用の画像)
+    │   ├── door.png      (PC用：ドアの画像)
+    │   └── elevator.png  (スマホ用：エレベーターの画像)
+    ├── artworks/    (作品画像)
+    └── ui/          (アイコンや装飾パーツ)
