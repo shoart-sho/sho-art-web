@@ -199,7 +199,8 @@
         /* 縦並びのFlexboxに変更 */
         flex-direction: column;
         width: 100vw;
-        height: 100vh;
+        height: 100vh; /* Fallback */
+        height: 100dvh; /* アドレスバー対策 */
         overflow-x: hidden;
         overflow-y: auto; /* 縦スクロール有効化 */
         scroll-snap-type: y mandatory; /* 縦スクロールでピタッと止める */
@@ -207,56 +208,60 @@
 
       .art-frame {
         min-width: 100%;
-        min-height: 100vh; /* スマホでも1画面1作品 */
+        height: auto; /* 内容に応じて伸びるように変更 */
+        min-height: 100dvh; /* 最低でも画面いっぱいは確保 */
         flex-direction: column; /* 上下に並べる */
         border-right: none;
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         scroll-snap-align: start;
+        justify-content: center; /* コンテンツを中央寄せ */
+        padding-bottom: 80px; /* フロアインジケーター分の余白（少し広めに） */
       }
 
       .art-visual {
-        flex: none;
+        flex: 0 0 auto; /* 自動伸縮させない */
         width: 100%;
-        height: 65vh; /* 作品を大きく見せる（65%） */
-        padding: 60px 20px 0; /* 上に余白、下は完全に詰めてタイトルと一体化 */
+        height: auto;
+        padding: 40px 20px 10px; /* 余白調整 */
         box-sizing: border-box;
-        align-items: flex-end; /* 画像を下に寄せてテキストとの距離を縮める */
+        display: flex;
+        align-items: center; /* 中央配置 */
+        justify-content: center;
       }
 
       .art-img {
-        max-height: 100%;
+        max-height: 55vh; /* 画像が高さを取りすぎないよう制限 */
         max-width: 100%;
         object-fit: contain;
         filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2)); /* 浮遊感 */
       }
 
       .art-info {
-        flex: none;
+        flex: 0 0 auto; /* テキストエリアは縮ませない */
         width: 100%;
-        height: 35vh; /* テキストエリアはコンパクトに（35%） */
-        padding: 5px 30px 40px; /* 上を詰め、下は余裕を持たせる */
-        justify-content: flex-start; /* 上詰め */
+        height: auto; /* 高さは内容なりにする */
+        padding: 10px 30px 20px; /* 余白を詰める */
+        justify-content: flex-start;
       }
 
       .art-title {
-        font-size: 1.6rem;
+        font-size: 1.5rem; /* 少しサイズ調整 */
         margin-bottom: 5px; /* タイトル下の余白を減らす */
       }
 
       .art-comment {
-        font-size: 0.85rem;
-        line-height: 1.6;
+        font-size: 0.9rem; /* 読みやすいサイズ */
+        line-height: 1.5;
         margin-bottom: 0;
-        /* 長文を3行で省略してスッキリ見せる */
         opacity: 0.8;
+        /* 省略設定を解除し、全文表示を優先（画像が縮むためスペースはあるはず） */
       }
 
       .art-comment p {
         margin: 0;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
+        /* 省略設定を解除 */
+        display: block;
+        overflow: visible;
       }
       
       /* スマホではサムネイルを隠す、あるいは小さくする等の調整 */

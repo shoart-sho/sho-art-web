@@ -347,24 +347,26 @@
 
       .art-frame {
         min-width: 100%;
-        min-height: 100vh; /* スマホでも1画面1作品 */
+        min-height: 100dvh; /* アドレスバー対策 */
+        height: auto; /* 内容に応じて伸びるようにする */
         flex-direction: column; /* 上下に並べる */
         border-right: none;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         scroll-snap-align: start;
+        padding-bottom: 80px; /* 下部に余白を追加 */
       }
 
       .art-visual {
         flex: none;
         width: 100%;
-        height: 65vh; /* 作品を大きく見せる（65%） */
-        padding: 60px 20px 0; /* 上に余白、下は完全に詰めてタイトルと一体化 */
+        height: auto; /* 固定高さを解除 */
+        padding: 40px 20px 10px; /* 余白調整 */
         box-sizing: border-box;
-        align-items: flex-end; /* 画像を下に寄せてテキストとの距離を縮める */
+        align-items: center;
       }
 
       .art-img {
-        max-height: 100%;
+        max-height: 50vh; /* 画像サイズを制限 */
         max-width: 100%;
         object-fit: contain;
         filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5)); /* 浮遊感 */
@@ -373,8 +375,8 @@
       .art-info {
         flex: none;
         width: 100%;
-        height: 35vh; /* テキストエリアはコンパクトに（35%） */
-        padding: 5px 30px 40px; /* 上を詰め、下は余裕を持たせる */
+        height: auto; /* 固定高さを解除 */
+        padding: 10px 30px 40px;
         justify-content: flex-start; /* 上詰め */
       }
 
