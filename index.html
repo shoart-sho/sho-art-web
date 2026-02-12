@@ -197,7 +197,7 @@
       <!-- タイプライター効果でテキストが表示されます -->
     </div>
 
-    <button id="enterBtn" class="enter-btn">Continue</button>
+    <button id="enterBtn" class="enter-btn" style="display:none;">Continue</button>
   </div>
 
   <!-- タイプライター演出スクリプト -->
@@ -272,10 +272,25 @@
           await new Promise(r => setTimeout(r, 400));
         }
       }
+
+      // --- 全テキスト表示完了：Enterボタンを表示（フェードイン） ---
+      const enterBtn = document.getElementById('enterBtn');
+      if (enterBtn) {
+        enterBtn.style.display = 'inline-block';
+        enterBtn.style.opacity = '0';
+        enterBtn.style.transition = 'opacity 400ms ease';
+        requestAnimationFrame(() => { enterBtn.style.opacity = '1'; });
+        enterBtn.focus();
+      }
     }
 
     // 画面フェードイン後に開始
+    // タイプライター演出を開始
     setTimeout(runTypewriter, totalDelay);
+
+    // runTypewriter の最後に到達したらボタンを表示するため、
+    // 関数内部で表示処理を行う（非同期関数の完了を検知しやすくするため）。
+    // 変更点：runTypewriter の最後でボタン表示を行う。
   </script>
 
 </body>
