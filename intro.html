@@ -1,3 +1,4 @@
+c:\Users\Owner\OneDrive\Desktop\sho-art-web\intro.html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -5,180 +6,185 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Invitation - Sho Art Exhibition</title>
   
-  <!-- Google Fonts: 明朝体を使って静かな雰囲気を出す -->
+  <!-- Google Fonts: 雰囲気に合う明朝体 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho&display=swap" rel="stylesheet">
 
   <style>
-    /* --- 基本設定 --- */
-    body {
+    /* --- 設定エリア（ここを変えると色や時間を調整できます） --- */
+    :root {
+      /* 中心の色（紫） */
+      --color-center: #8e44ad;
+      /* 外側の色（青） */
+      --color-outer: #2980b9;
+      /* テキストの色 */
+      --text-color: #ffffff;
+      
+      /* 待機時のアニメーション時間 */
+      --idle-duration: 8s;
+      /* クリック後の吸い込まれる時間（秒） */
+      --zoom-duration: 0.8s;
+    }
+
+    /* --- 基本リセット --- */
+    body, html {
       margin: 0;
       padding: 0;
-      background-color: #111; /* 暗めの背景色 */
-      color: #e6e6e6;         /* 文字は真っ白すぎないグレー */
-      font-family: "Shippori Mincho", serif; /* 明朝体 */
-      text-align: center;
-      overflow-x: hidden;     /* 横スクロール禁止 */
+      width: 100%;
+      height: 100%;
+      overflow: hidden; /* スクロール禁止 */
+      font-family: "Shippori Mincho", serif;
+      background-color: #000; /* 読み込み瞬間の黒背景 */
     }
 
-    /* --- レイアウト調整 --- */
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 40px 20px;
-      min-height: 100vh; /* 画面の高さいっぱいを使う */
+    /* --- 背景グラデーションレイヤー --- */
+    .bg-layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      
+      /* 中心から外側への円形グラデーション */
+      background: radial-gradient(circle at center, var(--color-center), var(--color-outer));
+      background-size: 200% 200%; /* 画面より大きくして動かす */
+      background-position: center;
+      
+      /* 待機時のアニメーション設定 */
+      animation: idle-gradient var(--idle-duration) ease-in-out infinite alternate;
+      
+      /* 中心基準で変形させる設定 */
+      transform-origin: center;
+      will-change: transform, opacity;
+    }
+
+    /* 待機時：ゆっくり中心に向かって動く（サイズを伸縮させて表現） */
+    @keyframes idle-gradient {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.2); } /* 少し大きくなる＝中心に迫る感覚 */
+    }
+
+    /* --- コンテンツレイヤー（文字とボタン） --- */
+    .content-layer {
+      position: relative;
+      z-index: 2; /* 背景より手前に表示 */
+      width: 100%;
+      height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: center; /* 上下中央寄せ */
+      justify-content: center;
       align-items: center;
-    }
-
-    /* --- 注意書きエリア --- */
-    .warning-text {
-      font-size: 0.9rem;
-      line-height: 2.2;
-      letter-spacing: 0.1em; /* 文字間隔を広げて読みやすく */
-      margin-bottom: 60px;
-      opacity: 0.9;
-    }
-
-    .warning-highlight {
-      color: #888;
-      font-size: 0.8rem;
-      margin-top: 20px;
-      display: block;
-    }
-
-    /* --- 入口エリア（共通） --- */
-    .entrance-area {
-      margin-top: 40px;
-      cursor: pointer; /* クリックできることを示す指マーク */
-      transition: opacity 0.5s ease;
-    }
-    
-    .entrance-area:hover {
-      opacity: 0.8; /* ホバー時に少し薄くする演出 */
-    }
-
-    .entrance-label {
-      margin-top: 15px;
-      font-size: 0.8rem;
-      letter-spacing: 0.2em;
-      color: #aaa;
-    }
-
-    /* 画像の仮スタイル（画像がない場合でも四角が表示されます） */
-    .entrance-img {
-      width: 200px;
-      height: 300px;
-      background-color: #333; /* 画像準備中の仮の色 */
-      border: 1px solid #555;
-      object-fit: cover;
-      display: block;
-      margin: 0 auto;
-    }
-
-    /* --- 【重要】PCとスマホの切り替え --- */
-    
-    /* デフォルトはPC用を表示、スマホ用を隠す */
-    .pc-entrance { display: block; }
-    .sp-entrance { display: none; }
-
-    /* 画面幅が768px以下（スマホ・タブレット縦）の場合のルール */
-    @media (max-width: 768px) {
-      .pc-entrance { display: none; } /* PC用を隠す */
-      .sp-entrance { display: block; } /* スマホ用を表示 */
+      color: var(--text-color);
+      text-align: center;
+      padding: 20px;
+      box-sizing: border-box;
       
-      .warning-text {
-        font-size: 0.8rem; /* スマホでは文字を少し小さく */
-        text-align: left;  /* スマホは左揃えの方が読みやすい場合が多い */
+      /* ふわっと表示 */
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* 注意書きテキスト */
+    .warning-text {
+      font-size: 1rem;
+      line-height: 2;
+      letter-spacing: 0.1em;
+      margin-bottom: 40px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    
+    .small-note {
+      font-size: 0.8rem;
+      opacity: 0.8;
+      display: block;
+      margin-top: 10px;
+    }
+
+    /* 進むボタン */
+    .enter-btn {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #fff;
+      padding: 12px 40px;
+      font-size: 0.9rem;
+      font-family: "Shippori Mincho", serif;
+      letter-spacing: 0.2em;
+      cursor: pointer;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      
+      /* 呼吸するようなアニメーション */
+      animation: btn-breathe 3s infinite ease-in-out;
+    }
+
+    .enter-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: #fff;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+    }
+
+    @keyframes btn-breathe {
+      0%, 100% { opacity: 0.7; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+
+    /* --- クリック後の演出クラス（JavaScriptで付与） --- */
+    
+    /* 1. 背景：一気に拡大して吸い込まれる */
+    body.is-exiting .bg-layer {
+      animation: zoom-in-bg var(--zoom-duration) ease-in forwards;
+    }
+
+    @keyframes zoom-in-bg {
+      0% {
+        transform: scale(1.2); /* 現在のサイズ付近から開始 */
+        opacity: 1;
+      }
+      100% {
+        transform: scale(8); /* 爆発的に拡大 */
+        opacity: 0; /* 最後は消える */
       }
     }
 
-    /* --- アニメーション定義 --- */
-    /* PC: ズームインして暗転（歩いて入る演出） */
-    @keyframes zoomInEnter {
+    /* 2. コンテンツ：手前に迫りながら消える */
+    body.is-exiting .content-layer {
+      animation: zoom-out-content var(--zoom-duration) ease-in forwards;
+    }
+
+    @keyframes zoom-out-content {
       0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.5); opacity: 1; }
-      100% { transform: scale(3); opacity: 0; }
-    }
-    .anim-zoom-in {
-      animation: zoomInEnter 1.5s forwards ease-in;
-      pointer-events: none; /* アニメーション中はクリック不可 */
+      100% { transform: scale(1.5); opacity: 0; }
     }
 
-    /* スマホ: 上にスライドして暗転（下に降りる演出） */
-    @keyframes slideUpFade {
-      0% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(-100vh); opacity: 0; }
+    /* スマホ調整 */
+    @media (max-width: 768px) {
+      .warning-text { font-size: 0.9rem; }
     }
-    .anim-slide-down {
-      /* 画面全体が上にいく＝視点が下に下がる */
-      animation: slideUpFade 1.5s forwards ease-in-out;
-      pointer-events: none;
-    }
-
   </style>
 </head>
 <body>
 
-  <div class="container">
-    
-    <!-- 1. 注意書きエリア -->
+  <!-- 背景レイヤー -->
+  <div class="bg-layer"></div>
+
+  <!-- コンテンツレイヤー -->
+  <div class="content-layer">
     <div class="warning-text">
-      <p>本展示は、iPad または PC での閲覧を推奨しています。</p>
-      <p>ここは、展示会の招待状を受け取った方のみが入ることのできる、<br>特別な場所です。</p>
-      <p>この場所で目にしたものについて、<br>URLの共有や作品画像の保存はご遠慮ください。</p>
-      
-      <span class="warning-highlight">この展示は、ご覧になる端末によって入口の形が異なります。</span>
+      <p>ようこそ、Sho Art Exhibitionへ。</p>
+      <p>このサイトは、PC / iPad / スマートフォンで<br>それぞれ異なる体験となるよう設計されています。</p>
+        <p>またここは、展示会の招待状を受け取った方のみ入れる特別な場所です<br>URLの共有や絵の保存はご遠慮ください。</p>
     </div>
 
-    <!-- 2. 入口エリア（PC / iPad用：ドア） -->
-    <div class="entrance-area pc-entrance" id="doorBtn">
-      <!-- ▼ 画像ができたら src="" の中を書き換えてください -->
-      <img src="images/intro/door.png" alt="入口の扉" class="entrance-img">
-      <p class="entrance-label">Enter</p>
-    </div>
-
-    <!-- 3. 入口エリア（スマホ用：エレベーター） -->
-    <div class="entrance-area sp-entrance" id="elevatorBtn">
-      <!-- ▼ 画像ができたら src="" の中を書き換えてください -->
-      <img src="images/intro/elevator.png" alt="地下へのエレベーター" class="entrance-img">
-      <p class="entrance-label">Go Down</p>
-    </div>
-
+    <button id="enterBtn" class="enter-btn">Continue</button>
   </div>
 
-  <script>
-    // --- JavaScript（最小限の動き） ---
-
-    // PC用のドアをクリックしたとき
-    const doorBtn = document.getElementById('doorBtn');
-    doorBtn.addEventListener('click', () => {
-      localStorage.setItem('visited', 'true');
-      
-      // アニメーションクラスをbodyに追加
-      document.body.classList.add('anim-zoom-in');
-
-      // アニメーション終了後に遷移
-      setTimeout(() => {
-        window.location.href = 'gallery.html';
-      }, 1500);
-    });
-
-    // スマホ用のエレベーターをタップしたとき
-    const elevatorBtn = document.getElementById('elevatorBtn');
-    elevatorBtn.addEventListener('click', () => {
-      localStorage.setItem('visited', 'true');
-      
-      document.body.classList.add('anim-slide-down');
-
-      setTimeout(() => {
-        window.location.href = 'gallery.html';
-      }, 1500);
-    });
-  </script>
-
+  <!-- イントロ用スクリプト -->
+  <script src="main.js"></script>
 </body>
 </html>

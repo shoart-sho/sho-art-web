@@ -1,5 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
 
+.gallery-container {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+.art-frame {
+  min-width: 100vw;
+  height: 100vh;
+  flex-shrink: 0;
+}
+
 body {
 	min-height: 100vh;
 	margin: 0;
