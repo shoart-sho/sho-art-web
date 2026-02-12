@@ -2,7 +2,7 @@
 // 0. リダイレクト処理 (即時実行)
 // --------------------------------------------------
 if (!localStorage.getItem('visited')) {
-  window.location.replace('index.html');
+  window.location.replace('./index.html');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
