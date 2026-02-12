@@ -185,6 +185,17 @@ c:\Users\Owner\OneDrive\Desktop\sho-art-web\intro.html
   </div>
 
   <!-- イントロ用スクリプト -->
-  <script src="main.js"></script>
+  <!-- <script src="main.js"></script> -->
+  <script>
+    document.getElementById('enterBtn').addEventListener('click', function() {
+      // アニメーション用のクラスを付与（吸い込まれる演出）
+      document.body.classList.add('is-exiting');
+      
+      // CSSのアニメーション時間（0.8秒）待機後にGallery.htmlへ遷移
+      setTimeout(function() {
+        window.location.href = 'Gallery.html';
+      }, 800);
+    });
+  </script>
 </body>
 </html>
