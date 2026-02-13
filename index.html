@@ -197,12 +197,19 @@
       <!-- タイプライター効果でテキストが表示されます -->
     </div>
 
-    <button id="enterBtn" class="enter-btn" style="display:none;">Continue</button>
+    <!-- ボタンをaタグで囲むことで、JSが壊れてもクリックすれば遷移できるようにする -->
+    <a href="Gallery.html" id="enterLink" style="text-decoration: none;">
+      <button id="enterBtn" class="enter-btn" style="display:none; pointer-events: none;">Continue</button>
+    </a>
   </div>
 
   <!-- タイプライター演出スクリプト -->
   <script>
-    document.getElementById('enterBtn').addEventListener('click', function() {
+    const enterLink = document.getElementById('enterLink');
+    const enterBtn = document.getElementById('enterBtn');
+
+    enterLink.addEventListener('click', function(e) {
+      e.preventDefault(); // 本来のリンク移動を一旦止める
       // アニメーション用のクラスを付与（吸い込まれる演出）
       document.body.classList.add('is-exiting');
       
@@ -274,13 +281,14 @@
       }
 
       // --- 全テキスト表示完了：Enterボタンを表示（フェードイン） ---
-      const enterBtn = document.getElementById('enterBtn');
       if (enterBtn) {
         enterBtn.style.display = 'inline-block';
         enterBtn.style.opacity = '0';
         enterBtn.style.transition = 'opacity 400ms ease';
         requestAnimationFrame(() => { enterBtn.style.opacity = '1'; });
         enterBtn.focus();
+        // ボタンが表示されたら、親のaタグのクリックを有効化（念のため）
+        enterBtn.style.pointerEvents = 'auto';
       }
     }
 

@@ -29,7 +29,7 @@
       background: linear-gradient(120deg, #9ec5ff, #d6b4fc, #ffd6e8, #caffbf);
       background-size: 400% 400%;
       animation: bgGradient 15s ease infinite;
-      color: #333;
+      color: #000; /* 文字色を少し濃くして視認性向上 */
       font-family: "Shippori Mincho", serif;
       overflow: hidden; /* 画面全体の大枠はスクロールさせない（コンテナで制御） */
     }
@@ -58,7 +58,7 @@
       
       /* 画面いっぱいのサイズ */
       width: 100vw;
-      height: 100vh;
+      height: 100dvh; /* vh -> dvh (スマホのアドレスバー対策) */
       
       /* スクロールした時にピタッと止まる演出 */
       scroll-snap-type: x mandatory;
@@ -68,7 +68,7 @@
     .art-frame {
       /* 画面いっぱいのサイズを確保 */
       min-width: 100vw;
-      height: 100vh;
+      height: 100dvh; /* vh -> dvh */
       
       /* 内部レイアウト（左：絵、右：情報） */
       display: flex;
@@ -199,8 +199,8 @@
         /* 縦並びのFlexboxに変更 */
         flex-direction: column;
         width: 100vw;
-        height: 100vh; /* Fallback */
-        height: 100dvh; /* アドレスバー対策 */
+        height: 100dvh;
+        /* height: 100vh; Fallbackは最近のブラウザでは不要なことが多いですが残すならdvhの後ろには書かない */
         overflow-x: hidden;
         overflow-y: auto; /* 縦スクロール有効化 */
         scroll-snap-type: y mandatory; /* 縦スクロールでピタッと止める */
@@ -208,14 +208,14 @@
 
       .art-frame {
         min-width: 100%;
-        height: auto; /* 内容に応じて伸びるように変更 */
-        min-height: 100dvh; /* 最低でも画面いっぱいは確保 */
+        height: auto;       /* 高さを固定しない（重要） */
+        min-height: 100dvh; /* 最低でも画面いっぱい */
         flex-direction: column; /* 上下に並べる */
         border-right: none;
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         scroll-snap-align: start;
         justify-content: center; /* コンテンツを中央寄せ */
-        padding-bottom: 80px; /* フロアインジケーター分の余白（少し広めに） */
+        padding-bottom: 100px; /* 余白を増やして被りを防ぐ */
       }
 
       .art-visual {
