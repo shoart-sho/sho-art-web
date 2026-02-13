@@ -1,9 +1,6 @@
 // --------------------------------------------------
-// 0. リダイレクト処理 (即時実行)
+// 0. リダイレクト処理 (削除済み)
 // --------------------------------------------------
-if (!localStorage.getItem('visited')) {
-  window.location.replace('./index.html');
-}
 
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('.gallery-container');

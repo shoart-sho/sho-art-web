@@ -107,14 +107,14 @@
       overflow-x: auto;
       overflow-y: hidden;
       width: 100vw;
-      height: 100vh;
+      height: 100dvh; /* vh -> dvh (スマホのアドレスバー対策) */
       scroll-snap-type: x mandatory;
     }
 
     /* --- 作品ごとのフレーム --- */
     .art-frame {
       min-width: 100vw;
-      height: 100vh;
+      height: 100dvh; /* vh -> dvh */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -339,7 +339,7 @@
         /* 縦並びのFlexboxに変更 */
         flex-direction: column;
         width: 100vw;
-        height: 100vh;
+        height: 100dvh;
         overflow-x: hidden;
         overflow-y: auto; /* 縦スクロール有効化 */
         scroll-snap-type: y mandatory; /* 縦スクロールでピタッと止める */
@@ -348,7 +348,7 @@
       .art-frame {
         min-width: 100%;
         min-height: 100dvh; /* アドレスバー対策 */
-        height: auto; /* 内容に応じて伸びるようにする */
+        height: auto;       /* 高さを固定しない（重要） */
         flex-direction: column; /* 上下に並べる */
         border-right: none;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);

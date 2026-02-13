@@ -210,6 +210,10 @@
 
     enterLink.addEventListener('click', function(e) {
       e.preventDefault(); // 本来のリンク移動を一旦止める
+      
+      // 訪問済みフラグを立てる（念のため）
+      localStorage.setItem('visited', 'true');
+
       // アニメーション用のクラスを付与（吸い込まれる演出）
       document.body.classList.add('is-exiting');
       
