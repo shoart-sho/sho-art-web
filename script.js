@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const scrollHint = document.getElementById('scroll-hint');
 
   // スマホ判定 (768px以下)
-  const isMobile = () => window.innerWidth <= 768;
+  const isMobile = () => window.innerWidth <= 1024;
 
   // --------------------------------------------------
   // 1. 横スクロール機能 (PCのみ)

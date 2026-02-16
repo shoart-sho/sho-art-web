@@ -178,23 +178,8 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.3);
     }
 
-    /* --- iPad / タブレット調整 (769px ~ 1024px) --- */
-    @media (min-width: 769px) and (max-width: 1024px) {
-      .art-visual {
-        flex: 2; /* 画像エリアの比率を増やして大きく見せる */
-        padding: 20px; /* 余白を減らす */
-      }
-      .art-img {
-        max-width: 100%;
-        max-height: 85vh;
-      }
-      .art-info {
-        padding: 40px; /* テキストエリアのバランス調整 */
-      }
-    }
-
-    /* --- スマホ用レスポンシブ設定 --- */
-    @media (max-width: 768px) {
+    /* --- スマホ・iPad用レスポンシブ設定 (縦スクロール) --- */
+    @media (max-width: 1024px) {
       .gallery-container {
         /* 縦並びのFlexboxに変更 */
         flex-direction: column;
@@ -230,7 +215,7 @@
       }
 
       .art-img {
-        max-height: 55vh; /* 画像が高さを取りすぎないよう制限 */
+        max-height: 65vh; /* 画像が高さを取りすぎないよう制限(iPad用に少し拡大) */
         max-width: 100%;
         object-fit: contain;
         filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2)); /* 浮遊感 */
@@ -514,7 +499,7 @@
   <!-- スマホ用フロアインジケーター（エレベーター階数表示風） -->
   <div id="floor-indicator">
     <div class="floor-current">01</div>
-    <div class="floor-total">/ 16</div>
+    <div class="floor-total">/ 17</div>
   </div>
 
   <!-- 
@@ -528,7 +513,7 @@
       <!-- 左：絵 -->
       <div class="art-visual">
         <!-- ▼ 画像パスを書き換えてください -->
-        <img src="images/2024/幻想蝶.jpg" alt="幻想蝶" class="art-img clickable-image">
+        <img src="images/2024/幻想蝶.jpg" alt="幻想蝶" class="art-img clickable-image" loading="lazy" decoding="async">
       </div>
       
       <!-- 右：情報 -->
@@ -553,12 +538,13 @@
           <a href="#art8" class="thumb-link"><img src="images/2025/優しさ.jpg" alt="8"></a>
           <a href="#art9" class="thumb-link"><img src="images/2025/思いやりに花を.jpg" alt="9"></a>
           <a href="#art10" class="thumb-link"><img src="images/2025/深愛.jpg" alt="10"></a>
-          <a href="#art11" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="11"></a>
-          <a href="#art12" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="12"></a>
-          <a href="#art13" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="13"></a>
-          <a href="#art14" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="14"></a>
-          <a href="#art15" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="15"></a>
-          <a href="#art16" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="16"></a>
+          <a href="#art11" class="thumb-link"><img src="images/2025/愛情.jpg" alt="11"></a>
+          <a href="#art12" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="12"></a>
+          <a href="#art13" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="13"></a>
+          <a href="#art14" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="14"></a>
+          <a href="#art15" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="15"></a>
+          <a href="#art16" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="16"></a>
+          <a href="#art17" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="17"></a>
         </nav>
       </div>
     </section>
@@ -566,7 +552,7 @@
     <!-- === 作品2 === -->
     <section class="art-frame" id="art2">
       <div class="art-visual">
-        <img src="images/2024/幻想鯨.jpg" alt="幻想鯨" class="art-img clickable-image">
+        <img src="images/2024/幻想鯨.jpg" alt="幻想鯨" class="art-img clickable-image" loading="lazy" decoding="async">
       </div>
       
       <div class="art-info">
@@ -588,12 +574,13 @@
           <a href="#art8" class="thumb-link"><img src="images/2025/優しさ.jpg" alt="8"></a>
           <a href="#art9" class="thumb-link"><img src="images/2025/思いやりに花を.jpg" alt="9"></a>
           <a href="#art10" class="thumb-link"><img src="images/2025/深愛.jpg" alt="10"></a>
-          <a href="#art11" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="11"></a>
-          <a href="#art12" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="12"></a>
-          <a href="#art13" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="13"></a>
-          <a href="#art14" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="14"></a>
-          <a href="#art15" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="15"></a>
-          <a href="#art16" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="16"></a>
+          <a href="#art11" class="thumb-link"><img src="images/2025/愛情.jpg" alt="11"></a>
+          <a href="#art12" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="12"></a>
+          <a href="#art13" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="13"></a>
+          <a href="#art14" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="14"></a>
+          <a href="#art15" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="15"></a>
+          <a href="#art16" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="16"></a>
+          <a href="#art17" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="17"></a>
         </nav>
       </div>
     </section>
@@ -601,7 +588,7 @@
     <!-- === 作品3 === -->
     <section class="art-frame" id="art3">
       <div class="art-visual">
-        <img src="images/2024/あの日見た景色.jpg" alt="あの日見た景色" class="art-img clickable-image">
+        <img src="images/2024/あの日見た景色.jpg" alt="あの日見た景色" class="art-img clickable-image" loading="lazy" decoding="async">
       </div>
       
       <div class="art-info">
@@ -623,12 +610,13 @@
           <a href="#art8" class="thumb-link"><img src="images/2025/優しさ.jpg" alt="8"></a>
           <a href="#art9" class="thumb-link"><img src="images/2025/思いやりに花を.jpg" alt="9"></a>
           <a href="#art10" class="thumb-link"><img src="images/2025/深愛.jpg" alt="10"></a>
-          <a href="#art11" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="11"></a>
-          <a href="#art12" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="12"></a>
-          <a href="#art13" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="13"></a>
-          <a href="#art14" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="14"></a>
-          <a href="#art15" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="15"></a>
-          <a href="#art16" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="16"></a>
+          <a href="#art11" class="thumb-link"><img src="images/2025/愛情.jpg" alt="11"></a>
+          <a href="#art12" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="12"></a>
+          <a href="#art13" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="13"></a>
+          <a href="#art14" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="14"></a>
+          <a href="#art15" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="15"></a>
+          <a href="#art16" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="16"></a>
+          <a href="#art17" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="17"></a>
         </nav>
       </div>
     </section>
@@ -637,7 +625,7 @@
     <!-- === 作品4 === -->
     <section class="art-frame" id="art4">
       <div class="art-visual">
-        <img src="images/2024/感謝.jpg" alt="感謝" class="art-img clickable-image">
+        <img src="images/2024/感謝.jpg" alt="感謝" class="art-img clickable-image" loading="lazy" decoding="async">
       </div>
       
       <div class="art-info">
@@ -659,12 +647,13 @@
           <a href="#art8" class="thumb-link"><img src="images/2025/優しさ.jpg" alt="8"></a>
           <a href="#art9" class="thumb-link"><img src="images/2025/思いやりに花を.jpg" alt="9"></a>
           <a href="#art10" class="thumb-link"><img src="images/2025/深愛.jpg" alt="10"></a>
-          <a href="#art11" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="11"></a>
-          <a href="#art12" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="12"></a>
-          <a href="#art13" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="13"></a>
-          <a href="#art14" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="14"></a>
-          <a href="#art15" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="15"></a>
-          <a href="#art16" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="16"></a>
+          <a href="#art11" class="thumb-link"><img src="images/2025/愛情.jpg" alt="11"></a>
+          <a href="#art12" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="12"></a>
+          <a href="#art13" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="13"></a>
+          <a href="#art14" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="14"></a>
+          <a href="#art15" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="15"></a>
+          <a href="#art16" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="16"></a>
+          <a href="#art17" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="17"></a>
         </nav>
       </div>
     </section>
@@ -673,7 +662,7 @@
      <!-- === 作品5 === -->
     <section class="art-frame" id="art5">
       <div class="art-visual">
-        <img src="images/2024/あの頃の鯨.jpg" alt="あの頃の鯨" class="art-img clickable-image">
+        <img src="images/2024/あの頃の鯨.jpg" alt="あの頃の鯨" class="art-img clickable-image" loading="lazy" decoding="async">
       </div>
       
       <div class="art-info">
@@ -695,12 +684,13 @@
           <a href="#art8" class="thumb-link"><img src="images/2025/優しさ.jpg" alt="8"></a>
           <a href="#art9" class="thumb-link"><img src="images/2025/思いやりに花を.jpg" alt="9"></a>
           <a href="#art10" class="thumb-link"><img src="images/2025/深愛.jpg" alt="10"></a>
-          <a href="#art11" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="11"></a>
-          <a href="#art12" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="12"></a>
-          <a href="#art13" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="13"></a>
-          <a href="#art14" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="14"></a>
-          <a href="#art15" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="15"></a>
-          <a href="#art16" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="16"></a>
+          <a href="#art11" class="thumb-link"><img src="images/2025/愛情.jpg" alt="11"></a>
+          <a href="#art12" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="12"></a>
+          <a href="#art13" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="13"></a>
+          <a href="#art14" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="14"></a>
+          <a href="#art15" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="15"></a>
+          <a href="#art16" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="16"></a>
+          <a href="#art17" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="17"></a>
         </nav>
       </div>
     </section>
@@ -709,7 +699,7 @@
      <!-- === 作品6 === -->
     <section class="art-frame" id="art6">
       <div class="art-visual">
-        <img src="images/2025/ミケ.jpg" alt="ミケ" class="art-img clickable-image">
+        <img src="images/2025/ミケ.jpg" alt="ミケ" class="art-img clickable-image" loading="lazy" decoding="async">
       </div>
       
       <div class="art-info">
@@ -734,19 +724,20 @@
           <a href="#art8" class="thumb-link"><img src="images/2025/優しさ.jpg" alt="8"></a>
           <a href="#art9" class="thumb-link"><img src="images/2025/思いやりに花を.jpg" alt="9"></a>
           <a href="#art10" class="thumb-link"><img src="images/2025/深愛.jpg" alt="10"></a>
-          <a href="#art11" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="11"></a>
-          <a href="#art12" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="12"></a>
-          <a href="#art13" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="13"></a>
-          <a href="#art14" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="14"></a>
-          <a href="#art15" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="15"></a>
-          <a href="#art16" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="16"></a>
+          <a href="#art11" class="thumb-link"><img src="images/2025/愛情.jpg" alt="11"></a>
+          <a href="#art12" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="12"></a>
+          <a href="#art13" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="13"></a>
+          <a href="#art14" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="14"></a>
+          <a href="#art15" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="15"></a>
+          <a href="#art16" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="16"></a>
+          <a href="#art17" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="17"></a>
         </nav>
       </div>
     </section>
        <!-- === 作品7 === -->
     <section class="art-frame" id="art7">
       <div class="art-visual">
-        <img src="images/2025/愛しさ.jpg" alt="愛しさ" class="art-img clickable-image">
+        <img src="images/2025/愛しさ.jpg" alt="愛しさ" class="art-img clickable-image" loading="lazy" decoding="async">
       </div>
       
       <div class="art-info">
@@ -768,12 +759,13 @@
           <a href="#art8" class="thumb-link"><img src="images/2025/優しさ.jpg" alt="8"></a>
           <a href="#art9" class="thumb-link"><img src="images/2025/思いやりに花を.jpg" alt="9"></a>
           <a href="#art10" class="thumb-link"><img src="images/2025/深愛.jpg" alt="10"></a>
-          <a href="#art11" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="11"></a>
-          <a href="#art12" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="12"></a>
-          <a href="#art13" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="13"></a>
-          <a href="#art14" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="14"></a>
-          <a href="#art15" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="15"></a>
-          <a href="#art16" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="16"></a>
+          <a href="#art11" class="thumb-link"><img src="images/2025/愛情.jpg" alt="11"></a>
+          <a href="#art12" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="12"></a>
+          <a href="#art13" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="13"></a>
+          <a href="#art14" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="14"></a>
+          <a href="#art15" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="15"></a>
+          <a href="#art16" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="16"></a>
+          <a href="#art17" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="17"></a>
         </nav>
       </div>
     </section>
@@ -781,7 +773,7 @@
     <!-- === 作品8 === -->
     <section class="art-frame" id="art8">
       <div class="art-visual">
-        <img src="images/2025/優しさ.jpg" alt="優しさ" class="art-img clickable-image">
+        <img src="images/2025/優しさ.jpg" alt="優しさ" class="art-img clickable-image" loading="lazy" decoding="async">
       </div>
       <div class="art-info">
         <h2 class="art-title">優しさ</h2>
@@ -801,12 +793,13 @@
           <a href="#art8" class="thumb-link active"><img src="images/2025/優しさ.jpg" alt="8"></a>
           <a href="#art9" class="thumb-link"><img src="images/2025/思いやりに花を.jpg" alt="9"></a>
           <a href="#art10" class="thumb-link"><img src="images/2025/深愛.jpg" alt="10"></a>
-          <a href="#art11" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="11"></a>
-          <a href="#art12" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="12"></a>
-          <a href="#art13" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="13"></a>
-          <a href="#art14" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="14"></a>
-          <a href="#art15" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="15"></a>
-          <a href="#art16" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="16"></a>
+          <a href="#art11" class="thumb-link"><img src="images/2025/愛情.jpg" alt="11"></a>
+          <a href="#art12" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="12"></a>
+          <a href="#art13" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="13"></a>
+          <a href="#art14" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="14"></a>
+          <a href="#art15" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="15"></a>
+          <a href="#art16" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="16"></a>
+          <a href="#art17" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="17"></a>
         </nav>
       </div>
     </section>
@@ -814,7 +807,7 @@
     <!-- === 作品9 === -->
     <section class="art-frame" id="art9">
       <div class="art-visual">
-        <img src="images/2025/思いやりに花を.jpg" alt="思いやりに花を" class="art-img clickable-image">
+        <img src="images/2025/思いやりに花を.jpg" alt="思いやりに花を" class="art-img clickable-image" loading="lazy" decoding="async">
       </div>
       <div class="art-info">
         <h2 class="art-title">思いやりに花を</h2>
@@ -834,12 +827,13 @@
           <a href="#art8" class="thumb-link"><img src="images/2025/優しさ.jpg" alt="8"></a>
           <a href="#art9" class="thumb-link active"><img src="images/2025/思いやりに花を.jpg" alt="9"></a>
           <a href="#art10" class="thumb-link"><img src="images/2025/深愛.jpg" alt="10"></a>
-          <a href="#art11" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="11"></a>
-          <a href="#art12" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="12"></a>
-          <a href="#art13" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="13"></a>
-          <a href="#art14" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="14"></a>
-          <a href="#art15" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="15"></a>
-          <a href="#art16" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="16"></a>
+          <a href="#art11" class="thumb-link"><img src="images/2025/愛情.jpg" alt="11"></a>
+          <a href="#art12" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="12"></a>
+          <a href="#art13" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="13"></a>
+          <a href="#art14" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="14"></a>
+          <a href="#art15" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="15"></a>
+          <a href="#art16" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="16"></a>
+          <a href="#art17" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="17"></a>
         </nav>
       </div>
     </section>
@@ -847,7 +841,7 @@
     <!-- === 作品10 === -->
     <section class="art-frame" id="art10">
       <div class="art-visual">
-        <img src="images/2025/深愛.jpg" alt="深愛" class="art-img clickable-image">
+        <img src="images/2025/深愛.jpg" alt="深愛" class="art-img clickable-image" loading="lazy" decoding="async">
       </div>
       <div class="art-info">
         <h2 class="art-title">深愛</h2>
@@ -867,12 +861,13 @@
           <a href="#art8" class="thumb-link"><img src="images/2025/優しさ.jpg" alt="8"></a>
           <a href="#art9" class="thumb-link"><img src="images/2025/思いやりに花を.jpg" alt="9"></a>
           <a href="#art10" class="thumb-link active"><img src="images/2025/深愛.jpg" alt="10"></a>
-          <a href="#art11" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="11"></a>
-          <a href="#art12" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="12"></a>
-          <a href="#art13" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="13"></a>
-          <a href="#art14" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="14"></a>
-          <a href="#art15" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="15"></a>
-          <a href="#art16" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="16"></a>
+          <a href="#art11" class="thumb-link"><img src="images/2025/愛情.jpg" alt="11"></a>
+          <a href="#art12" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="12"></a>
+          <a href="#art13" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="13"></a>
+          <a href="#art14" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="14"></a>
+          <a href="#art15" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="15"></a>
+          <a href="#art16" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="16"></a>
+          <a href="#art17" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="17"></a>
         </nav>
       </div>
     </section>
@@ -880,7 +875,41 @@
     <!-- === 作品11 === -->
     <section class="art-frame" id="art11">
       <div class="art-visual">
-        <img src="images/2025/優しい光.jpg" alt="優しい光" class="art-img clickable-image">
+        <img src="images/2025/愛情.jpg" alt="愛情" class="art-img clickable-image" loading="lazy" decoding="async">
+      </div>
+      <div class="art-info">
+        <h2 class="art-title">愛情</h2>
+        <p class="art-subtitle">Love</p>
+        <p class="art-year">2025</p>
+        <div class="art-comment">
+          <p>母親の誕生日に贈った絵です</p>
+        </div>
+        <nav class="thumbnails">
+          <a href="#art1" class="thumb-link"><img src="images/2024/幻想蝶.jpg" alt="1"></a>
+          <a href="#art2" class="thumb-link"><img src="images/2024/幻想鯨.jpg" alt="2"></a>
+          <a href="#art3" class="thumb-link"><img src="images/2024/あの日見た景色.jpg" alt="3"></a>
+          <a href="#art4" class="thumb-link"><img src="images/2024/感謝.jpg" alt="4"></a>
+          <a href="#art5" class="thumb-link"><img src="images/2024/あの頃の鯨.jpg" alt="5"></a>
+          <a href="#art6" class="thumb-link"><img src="images/2025/ミケ.jpg" alt="6"></a>
+          <a href="#art7" class="thumb-link"><img src="images/2025/愛しさ.jpg" alt="7"></a>
+          <a href="#art8" class="thumb-link"><img src="images/2025/優しさ.jpg" alt="8"></a>
+          <a href="#art9" class="thumb-link"><img src="images/2025/思いやりに花を.jpg" alt="9"></a>
+          <a href="#art10" class="thumb-link"><img src="images/2025/深愛.jpg" alt="10"></a>
+          <a href="#art11" class="thumb-link active"><img src="images/2025/愛情.jpg" alt="11"></a>
+          <a href="#art12" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="12"></a>
+          <a href="#art13" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="13"></a>
+          <a href="#art14" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="14"></a>
+          <a href="#art15" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="15"></a>
+          <a href="#art16" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="16"></a>
+          <a href="#art17" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="17"></a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- === 作品12 === -->
+    <section class="art-frame" id="art12">
+      <div class="art-visual">
+        <img src="images/2025/優しい光.jpg" alt="優しい光" class="art-img clickable-image" loading="lazy" decoding="async">
       </div>
       <div class="art-info">
         <h2 class="art-title">優しい光</h2>
@@ -900,20 +929,21 @@
           <a href="#art8" class="thumb-link"><img src="images/2025/優しさ.jpg" alt="8"></a>
           <a href="#art9" class="thumb-link"><img src="images/2025/思いやりに花を.jpg" alt="9"></a>
           <a href="#art10" class="thumb-link"><img src="images/2025/深愛.jpg" alt="10"></a>
-          <a href="#art11" class="thumb-link active"><img src="images/2025/優しい光.jpg" alt="11"></a>
-          <a href="#art12" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="12"></a>
-          <a href="#art13" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="13"></a>
-          <a href="#art14" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="14"></a>
-          <a href="#art15" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="15"></a>
-          <a href="#art16" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="16"></a>
+          <a href="#art11" class="thumb-link"><img src="images/2025/愛情.jpg" alt="11"></a>
+          <a href="#art12" class="thumb-link active"><img src="images/2025/優しい光.jpg" alt="12"></a>
+          <a href="#art13" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="13"></a>
+          <a href="#art14" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="14"></a>
+          <a href="#art15" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="15"></a>
+          <a href="#art16" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="16"></a>
+          <a href="#art17" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="17"></a>
         </nav>
       </div>
     </section>
 
-    <!-- === 作品12 === -->
-    <section class="art-frame" id="art12">
+    <!-- === 作品13 === -->
+    <section class="art-frame" id="art13">
       <div class="art-visual">
-        <img src="images/2025/羽ばたくやさしい霧.jpg" alt="羽ばたくやさしい霧" class="art-img clickable-image">
+        <img src="images/2025/羽ばたくやさしい霧.jpg" alt="羽ばたくやさしい霧" class="art-img clickable-image" loading="lazy" decoding="async">
       </div>
       <div class="art-info">
         <h2 class="art-title">羽ばたくやさしい霧</h2>
@@ -933,20 +963,21 @@
           <a href="#art8" class="thumb-link"><img src="images/2025/優しさ.jpg" alt="8"></a>
           <a href="#art9" class="thumb-link"><img src="images/2025/思いやりに花を.jpg" alt="9"></a>
           <a href="#art10" class="thumb-link"><img src="images/2025/深愛.jpg" alt="10"></a>
-          <a href="#art11" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="11"></a>
-          <a href="#art12" class="thumb-link active"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="12"></a>
-          <a href="#art13" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="13"></a>
-          <a href="#art14" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="14"></a>
-          <a href="#art15" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="15"></a>
-          <a href="#art16" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="16"></a>
+          <a href="#art11" class="thumb-link"><img src="images/2025/愛情.jpg" alt="11"></a>
+          <a href="#art12" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="12"></a>
+          <a href="#art13" class="thumb-link active"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="13"></a>
+          <a href="#art14" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="14"></a>
+          <a href="#art15" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="15"></a>
+          <a href="#art16" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="16"></a>
+          <a href="#art17" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="17"></a>
         </nav>
       </div>
     </section>
 
-    <!-- === 作品13 === -->
-    <section class="art-frame" id="art13">
+    <!-- === 作品14 === -->
+    <section class="art-frame" id="art14">
       <div class="art-visual">
-        <img src="images/2025/優しさに包まれた人へ.jpg" alt="優しさに包まれた人へ" class="art-img clickable-image">
+        <img src="images/2025/優しさに包まれた人へ.jpg" alt="優しさに包まれた人へ" class="art-img clickable-image" loading="lazy" decoding="async">
       </div>
       <div class="art-info">
         <h2 class="art-title">優しさに包まれた人へ</h2>
@@ -966,20 +997,21 @@
           <a href="#art8" class="thumb-link"><img src="images/2025/優しさ.jpg" alt="8"></a>
           <a href="#art9" class="thumb-link"><img src="images/2025/思いやりに花を.jpg" alt="9"></a>
           <a href="#art10" class="thumb-link"><img src="images/2025/深愛.jpg" alt="10"></a>
-          <a href="#art11" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="11"></a>
-          <a href="#art12" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="12"></a>
-          <a href="#art13" class="thumb-link active"><img src="images/2025/優しさに包まれた人へ.jpg" alt="13"></a>
-          <a href="#art14" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="14"></a>
-          <a href="#art15" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="15"></a>
-          <a href="#art16" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="16"></a>
+          <a href="#art11" class="thumb-link"><img src="images/2025/愛情.jpg" alt="11"></a>
+          <a href="#art12" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="12"></a>
+          <a href="#art13" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="13"></a>
+          <a href="#art14" class="thumb-link active"><img src="images/2025/優しさに包まれた人へ.jpg" alt="14"></a>
+          <a href="#art15" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="15"></a>
+          <a href="#art16" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="16"></a>
+          <a href="#art17" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="17"></a>
         </nav>
       </div>
     </section>
 
-    <!-- === 作品14 === -->
-    <section class="art-frame" id="art14">
+    <!-- === 作品15 === -->
+    <section class="art-frame" id="art15">
       <div class="art-visual">
-        <img src="images/2025/静寂の空は輝く.jpg" alt="静寂の空は輝く" class="art-img clickable-image">
+        <img src="images/2025/静寂の空は輝く.jpg" alt="静寂の空は輝く" class="art-img clickable-image" loading="lazy" decoding="async">
       </div>
       <div class="art-info">
         <h2 class="art-title">静寂の空は輝く</h2>
@@ -999,20 +1031,21 @@
           <a href="#art8" class="thumb-link"><img src="images/2025/優しさ.jpg" alt="8"></a>
           <a href="#art9" class="thumb-link"><img src="images/2025/思いやりに花を.jpg" alt="9"></a>
           <a href="#art10" class="thumb-link"><img src="images/2025/深愛.jpg" alt="10"></a>
-          <a href="#art11" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="11"></a>
-          <a href="#art12" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="12"></a>
-          <a href="#art13" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="13"></a>
-          <a href="#art14" class="thumb-link active"><img src="images/2025/静寂の空は輝く.jpg" alt="14"></a>
-          <a href="#art15" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="15"></a>
-          <a href="#art16" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="16"></a>
+          <a href="#art11" class="thumb-link"><img src="images/2025/愛情.jpg" alt="11"></a>
+          <a href="#art12" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="12"></a>
+          <a href="#art13" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="13"></a>
+          <a href="#art14" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="14"></a>
+          <a href="#art15" class="thumb-link active"><img src="images/2025/静寂の空は輝く.jpg" alt="15"></a>
+          <a href="#art16" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="16"></a>
+          <a href="#art17" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="17"></a>
         </nav>
       </div>
     </section>
 
-    <!-- === 作品15 === -->
-    <section class="art-frame" id="art15">
+    <!-- === 作品16 === -->
+    <section class="art-frame" id="art16">
       <div class="art-visual">
-        <img src="images/2026/夜明けに光る鯨と月.jpg" alt="夜明けに光る鯨と月" class="art-img clickable-image">
+        <img src="images/2026/夜明けに光る鯨と月.jpg" alt="夜明けに光る鯨と月" class="art-img clickable-image" loading="lazy" decoding="async">
       </div>
       <div class="art-info">
         <h2 class="art-title">夜明けに光る鯨と月</h2>
@@ -1032,20 +1065,21 @@
           <a href="#art8" class="thumb-link"><img src="images/2025/優しさ.jpg" alt="8"></a>
           <a href="#art9" class="thumb-link"><img src="images/2025/思いやりに花を.jpg" alt="9"></a>
           <a href="#art10" class="thumb-link"><img src="images/2025/深愛.jpg" alt="10"></a>
-          <a href="#art11" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="11"></a>
-          <a href="#art12" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="12"></a>
-          <a href="#art13" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="13"></a>
-          <a href="#art14" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="14"></a>
-          <a href="#art15" class="thumb-link active"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="15"></a>
-          <a href="#art16" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="16"></a>
+          <a href="#art11" class="thumb-link"><img src="images/2025/愛情.jpg" alt="11"></a>
+          <a href="#art12" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="12"></a>
+          <a href="#art13" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="13"></a>
+          <a href="#art14" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="14"></a>
+          <a href="#art15" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="15"></a>
+          <a href="#art16" class="thumb-link active"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="16"></a>
+          <a href="#art17" class="thumb-link"><img src="images/2026/花に溶けた感情.jpg" alt="17"></a>
         </nav>
       </div>
     </section>
 
-    <!-- === 作品16 === -->
-    <section class="art-frame" id="art16">
+    <!-- === 作品17 === -->
+    <section class="art-frame" id="art17">
       <div class="art-visual">
-        <img src="images/2026/花に溶けた感情.jpg" alt="花に溶けた感情" class="art-img clickable-image">
+        <img src="images/2026/花に溶けた感情.jpg" alt="花に溶けた感情" class="art-img clickable-image" loading="lazy" decoding="async">
       </div>
       <div class="art-info">
         <h2 class="art-title">花に溶けた感情</h2>
@@ -1065,12 +1099,13 @@
           <a href="#art8" class="thumb-link"><img src="images/2025/優しさ.jpg" alt="8"></a>
           <a href="#art9" class="thumb-link"><img src="images/2025/思いやりに花を.jpg" alt="9"></a>
           <a href="#art10" class="thumb-link"><img src="images/2025/深愛.jpg" alt="10"></a>
-          <a href="#art11" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="11"></a>
-          <a href="#art12" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="12"></a>
-          <a href="#art13" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="13"></a>
-          <a href="#art14" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="14"></a>
-          <a href="#art15" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="15"></a>
-          <a href="#art16" class="thumb-link active"><img src="images/2026/花に溶けた感情.jpg" alt="16"></a>
+          <a href="#art11" class="thumb-link"><img src="images/2025/愛情.jpg" alt="11"></a>
+          <a href="#art12" class="thumb-link"><img src="images/2025/優しい光.jpg" alt="12"></a>
+          <a href="#art13" class="thumb-link"><img src="images/2025/羽ばたくやさしい霧.jpg" alt="13"></a>
+          <a href="#art14" class="thumb-link"><img src="images/2025/優しさに包まれた人へ.jpg" alt="14"></a>
+          <a href="#art15" class="thumb-link"><img src="images/2025/静寂の空は輝く.jpg" alt="15"></a>
+          <a href="#art16" class="thumb-link"><img src="images/2026/夜明けに光る鯨と月.jpg" alt="16"></a>
+          <a href="#art17" class="thumb-link active"><img src="images/2026/花に溶けた感情.jpg" alt="17"></a>
         </nav>
       </div>
     </section>

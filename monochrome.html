@@ -318,23 +318,8 @@
       100% { transform: translateX(30px); opacity: 0; }
     }
 
-    /* --- iPad / タブレット調整 (769px ~ 1024px) --- */
-    @media (min-width: 769px) and (max-width: 1024px) {
-      .art-visual {
-        flex: 2; /* 画像エリアの比率を増やして大きく見せる */
-        padding: 20px; /* 余白を減らす */
-      }
-      .art-img {
-        max-width: 100%;
-        max-height: 85vh;
-      }
-      .art-info {
-        padding: 40px; /* テキストエリアのバランス調整 */
-      }
-    }
-
-    /* --- スマホ用レスポンシブ設定 --- */
-    @media (max-width: 768px) {
+    /* --- スマホ・iPad用レスポンシブ設定 (縦スクロール) --- */
+    @media (max-width: 1024px) {
       .gallery-container {
         /* 縦並びのFlexboxに変更 */
         flex-direction: column;
@@ -366,7 +351,7 @@
       }
 
       .art-img {
-        max-height: 50vh; /* 画像サイズを制限 */
+        max-height: 65vh; /* 画像サイズを制限(iPad用に少し拡大) */
         max-width: 100%;
         object-fit: contain;
         filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5)); /* 浮遊感 */
@@ -481,7 +466,7 @@
     <!-- === 作品1 === -->
     <section class="art-frame" id="mono1">
       <div class="art-visual">
-        <img src="images/2025/暗影.jpg" alt="暗影" class="art-img clickable-image">
+        <img src="images/2025/暗影.jpg" alt="暗影" class="art-img clickable-image" loading="lazy" decoding="async">
       </div>
       <div class="art-info">
         <h2 class="art-title">暗影</h2>
@@ -503,7 +488,7 @@
     <!-- === 作品2 === -->
     <section class="art-frame" id="mono2">
       <div class="art-visual">
-        <img src="images/2025/暗心.jpg" alt="暗心" class="art-img clickable-image">
+        <img src="images/2025/暗心.jpg" alt="暗心" class="art-img clickable-image" loading="lazy" decoding="async">
       </div>
       <div class="art-info">
         <h2 class="art-title">暗心</h2>
@@ -525,7 +510,7 @@
     <!-- === 作品3 === -->
     <section class="art-frame" id="mono3">
       <div class="art-visual">
-        <img src="images/2025/深海映像.jpg" alt="深海映像" class="art-img clickable-image">
+        <img src="images/2025/深海映像.jpg" alt="深海映像" class="art-img clickable-image" loading="lazy" decoding="async">
       </div>
       <div class="art-info">
         <h2 class="art-title">深海映像</h2>
@@ -547,7 +532,7 @@
     <!-- === 作品4 === -->
     <section class="art-frame" id="mono4">
       <div class="art-visual">
-        <img src="images/2025/恋のパズル.jpg" alt="恋のパズル" class="art-img clickable-image">
+        <img src="images/2025/恋のパズル.jpg" alt="恋のパズル" class="art-img clickable-image" loading="lazy" decoding="async">
       </div>
       <div class="art-info">
         <h2 class="art-title">恋のパズル</h2>
@@ -569,7 +554,7 @@
     <!-- === 作品5 === -->
     <section class="art-frame" id="mono5">
       <div class="art-visual">
-        <img src="images/2025/404_not_found.jpg" alt="404 not found" class="art-img clickable-image">
+        <img src="images/2025/404_not_found.jpg" alt="404 not found" class="art-img clickable-image" loading="lazy" decoding="async">
       </div>
       <div class="art-info">
         <h2 class="art-title">404 not found</h2>
