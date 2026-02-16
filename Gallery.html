@@ -487,6 +487,39 @@
       from { transform: scale(0.8); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
+
+    /* --- 縦向き推奨オーバーレイ --- */
+    #orientation-warning {
+      display: none; /* デフォルトは非表示 */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 20000; /* 最前面 */
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+      font-family: "Shippori Mincho", serif;
+    }
+    .warning-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      animation: rotate-phone 2s infinite ease-in-out;
+    }
+    .warning-msg {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      letter-spacing: 0.1em;
+    }
+    @keyframes rotate-phone {
+      0%, 10% { transform: rotate(-90deg); }
+      40%, 60% { transform: rotate(0deg); }
+      90%, 100% { transform: rotate(0deg); }
+    }
   </style>
 </head>
 <body>
@@ -1138,7 +1171,58 @@
     <img src="" alt="Expanded Image">
   </div>
 
+  <!-- 縦向き推奨オーバーレイ -->
+  <div id="orientation-warning">
+    <div class="warning-icon">📱</div>
+    <div class="warning-msg">
+      この端末では縦向きでの<br>閲覧を推奨しています
+    </div>
+  </div>
+
   <!-- ギャラリー機能用スクリプト -->
   <script src="script.js"></script>
+  <script>
+    /* --- 端末・向き判定ロジック --- */
+    (function() {
+      const warningEl = document.getElementById('orientation-warning');
+
+      // 判定条件の定義（将来的に条件を増やしやすい構造）
+      const checkConditions = () => {
+        // 画面の短辺（向きに関わらずデバイスの幅を取得）
+        const screenMin = Math.min(window.screen.width, window.screen.height);
+        
+        // iPad 10.2インチ (第7, 8, 9世代) の論理解像度短辺は 810px
+        // ※念のため前後1pxのバッファを持たせて判定
+        const isIpad10_2 = (screenMin >= 809 && screenMin <= 811);
+
+        // タッチデバイスかどうか（PCを除外するため）
+        const isTouch = 'ontouchend' in document;
+
+        // 現在横向きかどうか
+        const isLandscape = window.innerWidth > window.innerHeight;
+
+        // 【判定】ターゲット端末(iPad 8/9世代相当) かつ 横向き の場合
+        if (isTouch && isIpad10_2 && isLandscape) {
+          return true;
+        }
+        return false;
+      };
+
+      const updateWarning = () => {
+        if (checkConditions()) {
+          warningEl.style.display = 'flex';
+        } else {
+          warningEl.style.display = 'none';
+        }
+      };
+
+      // イベントリスナー登録
+      window.addEventListener('resize', updateWarning);
+      window.addEventListener('orientationchange', updateWarning);
+      
+      // 初期実行
+      updateWarning();
+    })();
+  </script>
 </body>
 </html>
