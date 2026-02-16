@@ -480,11 +480,7 @@
           <p>古いブラウン管に写った映像彼が誰でどこなのかわからない</p>
         </div>
         <nav class="thumbnails">
-          <a href="#mono1" class="thumb-link active"><img src="images/2025/暗影.jpg" alt="1"></a>
-          <a href="#mono2" class="thumb-link"><img src="images/2025/暗心.jpg" alt="2"></a>
-          <a href="#mono3" class="thumb-link"><img src="images/2025/深海映像.jpg" alt="3"></a>
-          <a href="#mono4" class="thumb-link"><img src="images/2025/恋のパズル.jpg" alt="4"></a>
-          <a href="#mono5" class="thumb-link"><img src="images/2025/404_not_found.jpg" alt="5"></a>
+          <!-- JSで自動生成 -->
         </nav>
       </div>
     </section>
@@ -502,11 +498,7 @@
           <p>影はいつも誰かについて行って同じ動きをする影も自由に動きたいと思っているのかもしれない</p>
         </div>
         <nav class="thumbnails">
-          <a href="#mono1" class="thumb-link"><img src="images/2025/暗影.jpg" alt="1"></a>
-          <a href="#mono2" class="thumb-link active"><img src="images/2025/暗心.jpg" alt="2"></a>
-          <a href="#mono3" class="thumb-link"><img src="images/2025/深海映像.jpg" alt="3"></a>
-          <a href="#mono4" class="thumb-link"><img src="images/2025/恋のパズル.jpg" alt="4"></a>
-          <a href="#mono5" class="thumb-link"><img src="images/2025/404_not_found.jpg" alt="5"></a>
+          <!-- JSで自動生成 -->
         </nav>
       </div>
     </section>
@@ -524,11 +516,7 @@
           <p>深海のように深く暗い世界を映す者</p>
         </div>
         <nav class="thumbnails">
-          <a href="#mono1" class="thumb-link"><img src="images/2025/暗影.jpg" alt="1"></a>
-          <a href="#mono2" class="thumb-link"><img src="images/2025/暗心.jpg" alt="2"></a>
-          <a href="#mono3" class="thumb-link active"><img src="images/2025/深海映像.jpg" alt="3"></a>
-          <a href="#mono4" class="thumb-link"><img src="images/2025/恋のパズル.jpg" alt="4"></a>
-          <a href="#mono5" class="thumb-link"><img src="images/2025/404_not_found.jpg" alt="5"></a>
+          <!-- JSで自動生成 -->
         </nav>
       </div>
     </section>
@@ -546,11 +534,7 @@
           <p>暗い世界でも君を愛そう</p>
         </div>
         <nav class="thumbnails">
-          <a href="#mono1" class="thumb-link"><img src="images/2025/暗影.jpg" alt="1"></a>
-          <a href="#mono2" class="thumb-link"><img src="images/2025/暗心.jpg" alt="2"></a>
-          <a href="#mono3" class="thumb-link"><img src="images/2025/深海映像.jpg" alt="3"></a>
-          <a href="#mono4" class="thumb-link active"><img src="images/2025/恋のパズル.jpg" alt="4"></a>
-          <a href="#mono5" class="thumb-link"><img src="images/2025/404_not_found.jpg" alt="5"></a>
+          <!-- JSで自動生成 -->
         </nav>
       </div>
     </section>
@@ -568,11 +552,7 @@
           <p>役目は終わったそれでも<span class="glitch-identity" data-text="ERROR-404" data-alt="エマ">ERROR-404</span>を守る処理は停止しなかった</p>
         </div>
         <nav class="thumbnails">
-          <a href="#mono1" class="thumb-link"><img src="images/2025/暗影.jpg" alt="1"></a>
-          <a href="#mono2" class="thumb-link"><img src="images/2025/暗心.jpg" alt="2"></a>
-          <a href="#mono3" class="thumb-link"><img src="images/2025/深海映像.jpg" alt="3"></a>
-          <a href="#mono4" class="thumb-link"><img src="images/2025/恋のパズル.jpg" alt="4"></a>
-          <a href="#mono5" class="thumb-link active"><img src="images/2025/404_not_found.jpg" alt="5"></a>
+          <!-- JSで自動生成 -->
         </nav>
       </div>
     </section>
@@ -600,5 +580,52 @@
 
   <!-- 共通スクリプトの読み込み -->
   <script src="script.js"></script>
+  <script>
+    /* --- サムネイル自動生成スクリプト --- */
+    document.addEventListener('DOMContentLoaded', () => {
+      const frames = document.querySelectorAll('.art-frame');
+      const artData = [];
+
+      // 1. 全作品の情報を収集
+      frames.forEach((frame, index) => {
+        // IDがなければ自動付与 (art1, art2...)
+        if (!frame.id) {
+          frame.id = `art${index + 1}`;
+        }
+
+        // メイン画像を取得してサムネイル用データとする
+        const img = frame.querySelector('.art-visual img');
+        if (img) {
+          artData.push({
+            id: frame.id,
+            src: img.getAttribute('src'),
+            alt: index + 1
+          });
+        }
+      });
+
+      // 2. 各セクションにサムネイルリストを生成して配置
+      frames.forEach(frame => {
+        const nav = frame.querySelector('.thumbnails');
+        if (nav) {
+          nav.innerHTML = ''; // 既存のHTML記述をクリア
+
+          artData.forEach(data => {
+            const a = document.createElement('a');
+            a.href = `#${data.id}`;
+            a.className = 'thumb-link';
+            if (data.id === frame.id) a.classList.add('active');
+
+            const thumbImg = document.createElement('img');
+            thumbImg.src = data.src;
+            thumbImg.alt = data.alt;
+
+            a.appendChild(thumbImg);
+            nav.appendChild(a);
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
