@@ -8,6 +8,7 @@
 body {
   overflow-y: auto;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 .gallery-container {
@@ -33,7 +34,8 @@ body {
   body {
     overflow-x: auto;
     overflow-y: hidden;
-    height: 100vh; /* For gallery-container height: 100% to work. PC is less affected by viewport unit issues. */
+    /* height: 100vh は禁止のため削除し、min-heightで対応 */
+    min-height: 100vh;
   }
   .gallery-container {
     display: flex;
@@ -43,7 +45,7 @@ body {
   }
   .art-frame {
     min-width: 100vw;
-    height: 100%;
+    min-height: 100vh; /* コンテンツが縦に伸びても大丈夫なように */
     flex-shrink: 0;
     padding: 0 40px; /* Add some horizontal padding between frames */
   }
@@ -188,7 +190,7 @@ body {
 }
 
 h1 {
-  height: 100vh;
+  min-height: 100vh; /* height: 100vh 禁止対応 */
   width: 100%;
   display: flex;
   justify-content: center;
@@ -277,7 +279,24 @@ body.scrolled h1 {
   font-size: 1rem;
   line-height: 1.8;
   color: #000000;
-  text-align: justify;
+  text-align: left;
+  
+  /* --- コメント表示ルール (フェード & タップ展開) --- */
+  max-height: 6em; /* 約3行分で制限 */
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  /* 下方向へのフェードアウト */
+  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  transition: max-height 0.4s ease;
+}
+
+/* 展開時のクラス */
+.art-description.is-expanded {
+  max-height: none;
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 
 .art-subtitle {
