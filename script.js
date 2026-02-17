@@ -6,8 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('.gallery-container');
   const scrollHint = document.getElementById('scroll-hint');
 
-  // スマホ判定 (768px以下)
-  const isMobile = () => window.innerWidth <= 1024;
+  // デバイス判定用のメディアクエリ (768px以下をスマホと判定)
+  const mobileMediaQuery = window.matchMedia('(max-width: 768px)');
+  const isMobile = () => mobileMediaQuery.matches;
 
   // --------------------------------------------------
   // 1. 横スクロール機能 (PCのみ)
@@ -16,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isScrolling = false; // 連打防止用フラグ
 
     window.addEventListener('wheel', (evt) => {
-      // スマホサイズ、またはCtrlキー(ズーム操作)が押されている場合は無効
+      // スマホサイズ、またはCtrlキー(ズーム操作)が押されている場合は、このカスタムスクロールを無効化
       if (isMobile() || evt.ctrlKey) return;
 
       // 縦スクロール(deltaY)が発生している場合
@@ -102,10 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // --------------------------------------------------
   // 5. タブレット・スマホでのUI調整 (ナビボタン等を隠す)
   // --------------------------------------------------
-  const mq = window.matchMedia('(max-width:1024px)');
   function handleResponsive() {
-    if (mq.matches) {
-      // 1024px以下ならナビボタンとサムネイルを無効化
+    if (isMobile()) { // isMobile()は768px以下でtrueを返す
+      // スマホサイズならナビボタンとサムネイルを無効化
       document.querySelectorAll('.thumbnails').forEach(nav => nav.style.display = 'none');
     } else {
       // PCなら表示
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // 初回実行とリサイズ監視
   handleResponsive();
-  mq.addEventListener('change', handleResponsive);
+  mobileMediaQuery.addEventListener('change', handleResponsive);
 
   // --------------------------------------------------
   // 6. Darkworld (最後のセクション) の演出

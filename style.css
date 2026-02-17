@@ -1,18 +1,52 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
 
+/* =============================================== */
+/* Layout System (Mobile First)                    */
+/* =============================================== */
+
+/* --- Base (Mobile: Vertical Scroll) --- */
+body {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 .gallery-container {
-  display: flex;
-  flex-direction: row;
-  overflow-x: auto;
-  overflow-y: hidden;
-  width: 100vw;
-  height: 100vh;
+  /* Mobile: acts as a simple block container */
+  display: block;
+  width: 100%;
 }
 
 .art-frame {
-  min-width: 100vw;
-  height: 100vh;
-  flex-shrink: 0;
+  /* Mobile: stack vertically, height is auto */
+  width: 100%;
+  min-height: 95vh; /* Give some space for URL bars etc. */
+  padding: 5vh 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- Desktop/iPad Landscape (min-width: 769px): Horizontal Scroll --- */
+@media (min-width: 769px) {
+  body {
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 100vh; /* For gallery-container height: 100% to work. PC is less affected by viewport unit issues. */
+  }
+  .gallery-container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: fit-content; /* Let it grow with flex items */
+  }
+  .art-frame {
+    min-width: 100vw;
+    height: 100%;
+    flex-shrink: 0;
+    padding: 0 40px; /* Add some horizontal padding between frames */
+  }
 }
 
 body {
@@ -178,6 +212,7 @@ body.scrolled h1 {
   padding: 0 20px 100px;
 }
 
+/* This seems to be for content within art-frame */
 .art-piece {
   display: flex;
   justify-content: space-between;
@@ -187,6 +222,11 @@ body.scrolled h1 {
   opacity: 0;
   transform: translateY(20px);
   animation: fadeInUp 0.8s ease-out forwards;
+  /* Make it flexible inside art-frame */
+  width: 100%;
+  max-width: 1100px; /* Limit content width on large screens */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @keyframes fadeInUp {
@@ -247,7 +287,7 @@ body.scrolled h1 {
   font-style: italic;
 } 
 
-@media (max-width: 768px) {
+@media (max-width: 768px) { /* This rule is for content, not the main layout */
   .art-piece {
     flex-direction: column;
     gap: 20px;
@@ -262,6 +302,7 @@ body.scrolled h1 {
     font-size: 1.5rem;
   }
 }
+
 
 @media (prefers-reduced-motion: reduce) {
   .art-piece {
