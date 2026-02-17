@@ -11,27 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const isMobile = () => mobileMediaQuery.matches;
 
   // --------------------------------------------------
-  // 0.5 iPad用 横向き推奨メッセージ (Portrait時に表示)
-  // --------------------------------------------------
-  const rotateOverlay = document.createElement('div');
-  rotateOverlay.id = 'rotate-overlay';
-  rotateOverlay.innerHTML = `
-    <div class="rotate-icon">↻</div>
-    <p style="font-family: serif; font-size: 1.2rem; line-height: 1.6; margin: 0 0 20px;">
-      この展示は横画面での閲覧を推奨します<br>
-      <span style="font-size: 0.9rem; opacity: 0.8;">Best viewed in landscape orientation</span>
-    </p>
-    <button id="close-rotate" style="padding: 8px 20px; background: transparent; border: 1px solid #fff; color: #fff; cursor: pointer; font-family: serif; border-radius: 4px;">
-      閉じる / Close
-    </button>
-  `;
-  document.body.appendChild(rotateOverlay);
-
-  document.getElementById('close-rotate').addEventListener('click', () => {
-    rotateOverlay.style.display = 'none';
-  });
-
-  // --------------------------------------------------
   // 1. 横スクロール機能 (PCのみ)
   // --------------------------------------------------
   if (container) {
