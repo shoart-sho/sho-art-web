@@ -186,7 +186,6 @@
         display: flex;
         flex-direction: row;
         overflow-x: auto;
-        overflow-x: hidden;
         scroll-snap-type: x mandatory;
         width: fit-content;
       }
@@ -345,7 +344,7 @@
       align-items: center;
       justify-content: center;
       position: relative;
-      overflow: hidden;
+      /* overflow: hidden; スマホでボタンが見切れるのを防ぐため削除 */
     }
 
     /* コンテンツ（画像とボタン）を包むラッパー */
@@ -366,6 +365,16 @@
       width: 300px;
       height: 400px;
       margin: 0 auto 30px;
+    }
+
+    /* スマホ向け調整：画像コンテナを画面に合わせて縮小し、ボタンのスペースを確保 */
+    @media (max-width: 768px) {
+      .dw-image-container {
+        width: 80vw;
+        height: auto;
+        aspect-ratio: 3 / 4;
+        max-height: 50vh;
+      }
     }
 
     .dw-image {
