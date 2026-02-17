@@ -9,8 +9,6 @@ body {
   overflow-y: auto;
   overflow-x: hidden;
   min-height: 100vh;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth; /* スナップ時の動きを滑らかに */
 }
 
 .gallery-container {
@@ -29,8 +27,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  scroll-snap-align: start;
-  scroll-snap-stop: always; /* 勢いよくスクロールしても必ず1枚ずつ止める */
 }
 
 /* --- Desktop/iPad Landscape (min-width: 769px): Horizontal Scroll --- */
@@ -48,12 +44,15 @@ body {
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory; /* 横方向のスナップを強制 */
+    -webkit-overflow-scrolling: touch;
   }
   .art-frame {
     min-width: 100vw;
     min-height: 100vh; /* コンテンツが縦に伸びても大丈夫なように */
     flex-shrink: 0;
     padding: 0 40px; /* Add some horizontal padding between frames */
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 }
 

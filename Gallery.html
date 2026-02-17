@@ -34,8 +34,6 @@
       /* スクロール制御を明確化：デフォルト(スマホ)はbodyで縦スクロール */
       overflow-y: auto;
       overflow-x: hidden;
-      scroll-snap-type: y mandatory;
-      scroll-behavior: smooth;
     }
 
     @keyframes bgGradient {
@@ -63,8 +61,6 @@
       padding: 20px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
       position: relative;
-      scroll-snap-align: start;
-      scroll-snap-stop: always; /* 勢いよくスクロールしても必ず1枚ずつ止める */
     }
 
     /* 猫のアニメーション */
@@ -200,6 +196,7 @@
         overflow-x: auto;
         overflow-y: hidden;
         scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
         width: 100%;
       }
 
@@ -209,7 +206,9 @@
         flex-direction: row; /* Side-by-side layout */
         border-right: 1px solid rgba(0, 0, 0, 0.1);
         scroll-snap-align: start;
+        scroll-snap-stop: always;
         padding: 0;
+        flex: 0 0 100%; /* 確実に1画面幅を確保 */
       }
 
       .art-visual {
@@ -487,32 +486,14 @@
       from { transform: scale(0.8); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
-
-    .warning-icon {
-      font-size: 4rem;
-      margin-bottom: 20px;
-      animation: rotate-phone 2s infinite ease-in-out;
-    }
-    .warning-msg {
-      font-size: 1.2rem;
-      line-height: 1.8;
-      letter-spacing: 0.1em;
-    }
-    @keyframes rotate-phone {
-      0%, 10% { transform: rotate(-90deg); }
-      40%, 60% { transform: rotate(0deg); }
-      90%, 100% { transform: rotate(0deg); }
-    }
   </style>
 </head>
 <body>
-
   <!-- スクロールヒント（最初は表示、スクロールで消える） -->
   <div id="scroll-hint">
     <div class="hint-icon">→</div>
     <div class="hint-text">Scroll</div>
   </div>
-
   <!-- スマホ用フロアインジケーター（エレベーター階数表示風） -->
   <div id="floor-indicator">
     <div class="floor-current">01</div>
@@ -879,14 +860,6 @@
   <!-- 画像拡大用モーダル -->
   <div id="image-modal">
     <img src="" alt="Expanded Image">
-  </div>
-
-  <!-- 縦向き推奨オーバーレイ -->
-  <div id="orientation-warning">
-    <div class="warning-icon">📱</div>
-    <div class="warning-msg">
-      この端末では縦向きでの<br>閲覧を推奨しています
-    </div>
   </div>
 
   <!-- ギャラリー機能用スクリプト -->
