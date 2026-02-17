@@ -31,13 +31,9 @@
       animation: bgGradient 15s ease infinite;
       color: #000; /* 文字色を少し濃くして視認性向上 */
       font-family: "Shippori Mincho", serif;
-      overflow: hidden; /* 画面全体の大枠はスクロールさせない（コンテナで制御） */
-    }
-
-    /* 猫のアニメーション */
-    @keyframes cat-walk-rl {
-      0% { right: 0; }
-      100% { right: 100%; transform: translateX(100%); }
+      /* スクロール制御を明確化：デフォルト(スマホ)はbodyで縦スクロール */
+      overflow-y: auto;
+      overflow-x: hidden;
     }
 
     @keyframes bgGradient {
@@ -48,11 +44,9 @@
 
     /* --- Layout System (Mobile First / Vertical Scroll) --- */
     .gallery-container {
-      /* Mobile/Default: Vertical scroll */
+      /* モバイルでは単純なブロック要素として振る舞う */
       display: block;
       width: 100vw;
-      overflow-y: auto;
-      overflow-x: hidden;
     }
 
     .art-frame {
@@ -67,6 +61,12 @@
       padding: 20px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
       position: relative;
+    }
+
+    /* 猫のアニメーション */
+    @keyframes cat-walk-rl {
+      0% { right: 0; }
+      100% { right: 100%; transform: translateX(100%); }
     }
 
     /* --- 左側：絵のエリア --- */
@@ -182,17 +182,27 @@
 
     /* --- PC / iPad Landscape: Horizontal Scroll --- */
     @media (min-width: 769px) and (orientation: landscape) {
+      body {
+        /* PCではbodyの高さを固定し、スクロールを内部コンテナに委譲 */
+        height: 100vh;
+        overflow: hidden;
+      }
+
       .gallery-container {
+        /* PCではコンテナがスクロールを担当 */
+        height: 100%; /* bodyの高さ100%を継承 */
         display: flex;
         flex-direction: row;
         overflow-x: auto;
+        overflow-y: hidden;
         scroll-snap-type: x mandatory;
-        width: fit-content;
+        width: 100%;
       }
 
       .art-frame {
+        height: 100%; /* コンテナの高さ100%を継承 */
+        width: 100vw; /* 1フレームを画面幅に */
         flex-direction: row; /* Side-by-side layout */
-        border-right: none;
         border-right: 1px solid rgba(0, 0, 0, 0.1);
         scroll-snap-align: start;
         padding: 0;

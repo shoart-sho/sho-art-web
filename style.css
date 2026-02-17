@@ -30,7 +30,7 @@ body {
 }
 
 /* --- Desktop/iPad Landscape (min-width: 769px): Horizontal Scroll --- */
-@media (min-width: 769px) {
+@media (min-width: 769px) and (orientation: landscape) {
   body {
     overflow-x: auto;
     overflow-y: hidden;
@@ -41,7 +41,7 @@ body {
     display: flex;
     flex-direction: row;
     height: 100%;
-    width: fit-content; /* Let it grow with flex items */
+    width: 100%;
   }
   .art-frame {
     min-width: 100vw;

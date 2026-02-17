@@ -35,31 +35,45 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1. 横スクロール機能 (PCのみ)
   // --------------------------------------------------
   if (container) {
-    let isScrolling = false; // 連打防止用フラグ
+    const desktopMediaQuery = window.matchMedia('(min-width: 769px) and (orientation: landscape)');
+    let isWheelScrolling = false; // 連打防止用フラグ
 
-    window.addEventListener('wheel', (evt) => {
-      // スマホサイズ、またはCtrlキー(ズーム操作)が押されている場合は、このカスタムスクロールを無効化
-      if (isMobile() || evt.ctrlKey) return;
-
+    // 縦ホイールを横スクロールに変換するイベントハンドラ
+    const handleWheelScroll = (evt) => {
       // 縦スクロール(deltaY)が発生している場合
-      if (evt.deltaY !== 0) {
+      if (evt.deltaY !== 0 && !evt.ctrlKey) {
         evt.preventDefault(); // 本来の縦スクロールをキャンセル
         
         // スクロール中なら何もしない（Snap挙動を安定させるため）
-        if (isScrolling) return;
+        if (isWheelScrolling) return;
 
         // 次へ進むか戻るか判定 (1画面分スクロール)
         const direction = evt.deltaY > 0 ? 1 : -1;
+        // PCレイアウトではコンテナがスクロールするため、コンテナを操作
         container.scrollBy({ left: container.clientWidth * direction, behavior: 'smooth' });
         
         // 連打防止（アニメーション完了まで待機）
-        isScrolling = true;
-        setTimeout(() => { isScrolling = false; }, 600);
+        isWheelScrolling = true;
+        setTimeout(() => { isWheelScrolling = false; }, 600);
         
         // スクロールヒントを消す
         if (scrollHint) scrollHint.classList.add('fade-out');
       }
-    }, { passive: false });
+    };
+
+    // レイアウトに応じてイベントリスナーを付け外しするコントローラー
+    const toggleWheelListener = () => {
+      // 以前のリスナーを念のため解除
+      window.removeEventListener('wheel', handleWheelScroll, { passive: false });
+      if (desktopMediaQuery.matches) {
+        // PC/iPad横画面レイアウトの場合、リスナーを登録
+        window.addEventListener('wheel', handleWheelScroll, { passive: false });
+      }
+    };
+
+    // 初回実行と、画面サイズや向きの変更を監視
+    desktopMediaQuery.addEventListener('change', toggleWheelListener);
+    toggleWheelListener();
   }
 
   // --------------------------------------------------
