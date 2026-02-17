@@ -222,12 +222,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // --------------------------------------------------
   // 9. コメント（説明文）のタップ展開
   // --------------------------------------------------
-  const descriptions = document.querySelectorAll('.art-description');
-  descriptions.forEach(desc => {
-    desc.addEventListener('click', (e) => {
-      // 親要素へのイベント伝播を止める（必要であれば）
-      // e.stopPropagation();
-      desc.classList.toggle('is-expanded');
+  const comments = document.querySelectorAll('.art-comment');
+  comments.forEach(comment => {
+    comment.addEventListener('click', (e) => {
+      comment.classList.toggle('is-expanded');
     });
   });
 });

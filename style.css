@@ -69,7 +69,7 @@ body.Nocturne {
 
 body.Nocturne h1,
 body.Nocturne .art-title,
-body.Nocturne .art-description,
+body.Nocturne .art-comment,
 body.Nocturne .art-subtitle {
 	color: black;
 }
@@ -275,25 +275,25 @@ body.scrolled h1 {
   display: inline-block;
 }
 
-.art-description {
+.art-comment {
   font-size: 1rem;
   line-height: 1.8;
   color: #000000;
   text-align: left;
   
   /* --- コメント表示ルール (フェード & タップ展開) --- */
-  max-height: 6em; /* 約3行分で制限 */
+  max-height: 6em; /* This is a fallback, main style is in Gallery.html */
   overflow: hidden;
   position: relative;
   cursor: pointer;
   /* 下方向へのフェードアウト */
   -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
   mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-  transition: max-height 0.4s ease;
+  transition: max-height 0.5s ease-in-out;
 }
 
 /* 展開時のクラス */
-.art-description.is-expanded {
+.art-comment.is-expanded {
   max-height: none;
   -webkit-mask-image: none;
   mask-image: none;
