@@ -10,6 +10,7 @@ body {
   overflow-x: hidden;
   min-height: 100vh;
   scroll-snap-type: y mandatory;
+  scroll-behavior: smooth; /* スナップ時の動きを滑らかに */
 }
 
 .gallery-container {
@@ -29,21 +30,24 @@ body {
   justify-content: center;
   align-items: center;
   scroll-snap-align: start;
+  scroll-snap-stop: always; /* 勢いよくスクロールしても必ず1枚ずつ止める */
 }
 
 /* --- Desktop/iPad Landscape (min-width: 769px): Horizontal Scroll --- */
 @media (min-width: 769px) and (orientation: landscape) {
   body {
-    overflow-x: auto;
-    overflow-y: hidden;
-    /* height: 100vh は禁止のため削除し、min-heightで対応 */
-    min-height: 100vh;
+    /* PC/iPad横: コンテナスクロールのためbodyは固定 */
+    overflow: hidden;
+    height: 100vh;
   }
   .gallery-container {
     display: flex;
     flex-direction: row;
     height: 100%;
     width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory; /* 横方向のスナップを強制 */
   }
   .art-frame {
     min-width: 100vw;
