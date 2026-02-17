@@ -9,6 +9,7 @@ body {
   overflow-y: auto;
   overflow-x: hidden;
   min-height: 100vh;
+  scroll-snap-type: y mandatory;
 }
 
 .gallery-container {
@@ -27,6 +28,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  scroll-snap-align: start;
 }
 
 /* --- Desktop/iPad Landscape (min-width: 769px): Horizontal Scroll --- */
