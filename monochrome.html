@@ -19,11 +19,23 @@
       overflow: hidden; /* 画面全体の大枠はスクロールさせない */
     }
 
+    /* 画像保存防止（スマホ・タブレット対応） */
+    img {
+      -webkit-user-drag: none;       /* ドラッグ禁止 */
+      -webkit-touch-callout: none;   /* iOS長押しメニュー禁止 */
+      user-select: none;             /* テキスト選択禁止 */
+      -webkit-user-select: none;
+      -moz-user-select: none;
+    }
+
     /* ERROR-404 Glitch Animation */
     .glitch-identity {
       position: relative;
       display: inline-block;
       font-family: 'Courier New', monospace; /* ロボット・システム的なフォント */
+      font-weight: bold;
+      color: #ff5555;
+      text-shadow: 2px 0 #00ffff;
     }
 
     /* エマが一瞬現れるレイヤー */
@@ -34,15 +46,15 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: #7e7e7e; /* 元の文字を隠すための背景色（ダークモード前提） */
-      color: #000000;
+      background-color: #000000; /* 背景を黒くして強調 */
+      color: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
       opacity: 0;
       z-index: 2;
       pointer-events: none;
-      animation: identity-flash 12s infinite; /* 忘れた頃にやってくる不規則性 */
+      animation: identity-flash 6s infinite; /* 頻度を上げて目立たせる */
     }
 
     /* ノイズ・グリッチのレイヤー */
@@ -56,29 +68,40 @@
       opacity: 0;
       z-index: 1;
       background: transparent;
-      text-shadow: 2px 0 rgba(255, 0, 0, 0.7), -2px 0 rgba(0, 255, 255, 0.7);
+      text-shadow: -3px 0 #ff0000, 3px 0 #00ffff;
       pointer-events: none;
-      animation: glitch-noise 5s infinite;
+      animation: glitch-noise 2s infinite linear alternate-reverse; /* ノイズをより不規則に */
     }
 
     @keyframes identity-flash {
-      0%, 95% { opacity: 0; }
-      95.1% { opacity: 1; transform: skewX(20deg); }
-      95.3% { opacity: 1; transform: skewX(-20deg); }
-      95.5% { opacity: 1; transform: none; }
-      97% { opacity: 1; }
-      97.1% { opacity: 0; }
+      0%, 90% { opacity: 0; }
+      90.1% { opacity: 1; transform: skewX(40deg) scale(1.1); }
+      90.3% { opacity: 1; transform: skewX(-40deg) scale(0.9); }
+      90.5% { opacity: 1; transform: none; filter: invert(1); }
+      92% { opacity: 1; }
+      92.1% { opacity: 0; }
       100% { opacity: 0; }
     }
 
     @keyframes glitch-noise {
-      0%, 92% { opacity: 0; transform: translate(0); clip-path: inset(0 0 0 0); }
-      92.1% { opacity: 1; transform: translate(-2px, 1px); clip-path: inset(10% 0 50% 0); }
-      92.3% { opacity: 1; transform: translate(2px, -1px); clip-path: inset(60% 0 10% 0); }
-      92.5% { opacity: 0; transform: translate(0); }
-      96% { opacity: 0; }
-      96.1% { opacity: 0.8; transform: translate(1px, 0); clip-path: inset(0 0 0 0); }
-      96.3% { opacity: 0; }
+      0% { opacity: 0; }
+      /* 細かいノイズの連続 */
+      2% { opacity: 1; transform: translate(-2px, 0); clip-path: inset(40% 0 45% 0); }
+      4% { opacity: 1; transform: translate(2px, 0); clip-path: inset(10% 0 80% 0); }
+      6% { opacity: 0; }
+      
+      /* 大きなズレ */
+      20% { opacity: 0; }
+      21% { opacity: 1; transform: translate(-5px, 3px); clip-path: inset(20% 0 50% 0); filter: hue-rotate(90deg); }
+      23% { opacity: 1; transform: translate(5px, -3px); clip-path: inset(60% 0 10% 0); }
+      25% { opacity: 0; }
+
+      /* 激しい点滅と反転 */
+      60% { opacity: 0; }
+      61% { opacity: 1; transform: translate(3px, 0); clip-path: inset(0 0 0 0); filter: invert(1); }
+      62% { opacity: 0; }
+      63% { opacity: 1; transform: translate(-3px, 0); clip-path: inset(0 0 0 0); filter: none; }
+      64% { opacity: 0; }
       100% { opacity: 0; }
     }
 
@@ -581,6 +604,13 @@
   <!-- 共通スクリプトの読み込み -->
   <script src="script.js"></script>
   <script>
+    /* --- 画像保存防止（右クリック禁止） --- */
+    document.addEventListener('contextmenu', (e) => {
+      if (e.target.tagName === 'IMG') {
+        e.preventDefault();
+      }
+    });
+
     /* --- サムネイル自動生成スクリプト --- */
     document.addEventListener('DOMContentLoaded', () => {
       const frames = document.querySelectorAll('.art-frame');

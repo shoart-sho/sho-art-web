@@ -25,6 +25,14 @@
     html {
       scroll-snap-type: y mandatory; /* スマホ用：縦スナップ */
     }
+    /* 画像保存防止（スマホ・タブレット対応） */
+    img {
+      -webkit-user-drag: none;       /* ドラッグ禁止 */
+      -webkit-touch-callout: none;   /* iOS長押しメニュー禁止 */
+      user-select: none;             /* テキスト選択禁止 */
+      -webkit-user-select: none;
+      -moz-user-select: none;
+    }
     body {
       margin: 0;
       padding: 0 !important; /* style.cssのpadding-top:30vhを強制リセット */
@@ -913,6 +921,13 @@
   <!-- ギャラリー機能用スクリプト -->
   <script src="script.js"></script>
   <script>
+    /* --- 画像保存防止（右クリック禁止） --- */
+    document.addEventListener('contextmenu', (e) => {
+      if (e.target.tagName === 'IMG') {
+        e.preventDefault();
+      }
+    });
+
     /* --- サムネイル自動生成スクリプト --- */
     document.addEventListener('DOMContentLoaded', () => {
       const frames = document.querySelectorAll('.art-frame');

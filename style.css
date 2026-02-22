@@ -165,6 +165,15 @@ h3 {
   box-sizing: border-box;
 }
 
+img {
+  /* 画像保存防止：ドラッグ、選択、長押しメニューを無効化 */
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+
 html, body {
   font-family: serif;
 }
