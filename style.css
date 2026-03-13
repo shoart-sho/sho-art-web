@@ -9,6 +9,9 @@ body {
   overflow-y: auto;
   overflow-x: hidden;
   min-height: 100vh;
+  --bg-brightness: 0.1; /* 初期の暗さ */
+  filter: brightness(var(--bg-brightness)); /* クリックで明るくする */
+  transition: filter 0.5s ease; /* 滑らかな変化 */
 }
 
 .gallery-container {
@@ -197,6 +200,17 @@ html, body {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+
+/* タイピングアニメーション */
+.typing {
+  border-right: 2px solid #000;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { border-color: #000; }
+  51%, 100% { border-color: transparent; }
 }
 
 body {
