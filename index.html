@@ -205,6 +205,11 @@
 
   <!-- タイプライター演出スクリプト -->
   <script>
+    // 2回目以降の訪問者を検知してGalleryへ自動遷移
+    if (localStorage.getItem('visited') === 'true') {
+      window.location.replace('Gallery.html');
+    }
+
     const enterLink = document.getElementById('enterLink');
     const enterBtn = document.getElementById('enterBtn');
 
