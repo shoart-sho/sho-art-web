@@ -184,6 +184,68 @@
       .warning-text { font-size: 0.9rem; }
       .handwritten { font-size: 1em; }
     }
+
+    /* --- BGM ON/OFF プロンプト --- */
+    .bgm-prompt {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.88);
+      color: #ffffff;
+      padding: 24px;
+      text-align: center;
+    }
+    .bgm-prompt-card {
+      width: min(100%, 380px);
+      padding: 28px 24px;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 24px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.4);
+    }
+    .bgm-prompt-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem;
+      margin: 0;
+      letter-spacing: 0.12em;
+    }
+    .bgm-prompt-text {
+      margin: 18px 0 26px;
+      font-size: 0.96rem;
+      line-height: 1.7;
+      letter-spacing: 0.08em;
+      opacity: 0.9;
+    }
+    .bgm-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .bgm-btn {
+      min-width: 120px;
+      border: 1px solid rgba(255,255,255,0.45);
+      background: transparent;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-family: 'Courier Prime', monospace;
+      letter-spacing: 0.15em;
+      transition: transform 0.22s ease, background 0.22s ease;
+    }
+    .bgm-btn:hover,
+    .bgm-btn:focus {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.12);
+      outline: none;
+    }
+    .bgm-prompt.hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -203,15 +265,104 @@
     </a>
   </div>
 
+  <audio id="bgm-audio" src="bgm.mp3" preload="auto" loop></audio>
+
+  <div id="bgm-prompt" class="bgm-prompt">
+    <div class="bgm-prompt-card">
+      <div class="bgm-prompt-title">BGM</div>
+      <div class="bgm-prompt-text">
+        このページ専用の幻想的なサウンドを再生しますか？<br>
+        「ON」を選ぶとゆったりフェードインし、ループ再生されます。
+      </div>
+      <div class="bgm-buttons">
+        <button id="bgm-on" class="bgm-btn">ON</button>
+        <button id="bgm-off" class="bgm-btn">OFF</button>
+      </div>
+    </div>
+  </div>
+
   <!-- タイプライター演出スクリプト -->
   <script>
-    // 2回目以降の訪問者を検知してGalleryへ自動遷移
-    if (localStorage.getItem('visited') === 'true') {
-      window.location.replace('Gallery.html');
-    }
+    // 2回目以降の訪問時に自動でページを移動する機能を停止しました。
+    // これにより、毎回BGMの選択やイントロの演出を確実に表示させることができます。
 
     const enterLink = document.getElementById('enterLink');
     const enterBtn = document.getElementById('enterBtn');
+    const bgmPrompt = document.getElementById('bgm-prompt');
+    const bgmAudio = document.getElementById('bgm-audio');
+    const bgmOnBtn = document.getElementById('bgm-on');
+    const bgmOffBtn = document.getElementById('bgm-off');
+
+    let bgmAudioCtx = null;
+    let bgmGain = null;
+
+    function initBgm() {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContext) return;
+
+      bgmAudioCtx = new AudioContext();
+      try {
+        const source = bgmAudioCtx.createMediaElementSource(bgmAudio);
+        bgmGain = bgmAudioCtx.createGain();
+        bgmGain.gain.value = 0;
+        source.connect(bgmGain).connect(bgmAudioCtx.destination);
+      } catch (error) {
+        console.warn('Web Audio API initialization failed:', error);
+        bgmAudioCtx = null;
+        bgmGain = null;
+      }
+    }
+
+    function fadeInBgm(durationMs = 6000) {
+      if (bgmGain && bgmAudioCtx) {
+        const now = bgmAudioCtx.currentTime;
+        bgmGain.gain.cancelScheduledValues(now);
+        bgmGain.gain.setValueAtTime(0, now);
+        bgmGain.gain.linearRampToValueAtTime(0.1, now + durationMs / 1000);
+      } else {
+        bgmAudio.volume = 0;
+        const step = 0.02;
+        const interval = setInterval(() => {
+          bgmAudio.volume = Math.min(bgmAudio.volume + step, 0.1);
+          if (bgmAudio.volume >= 0.1) clearInterval(interval);
+        }, durationMs / 15);
+      }
+    }
+
+    async function startBgmPlayback() {
+      if (!bgmAudioCtx && (window.AudioContext || window.webkitAudioContext)) {
+        initBgm();
+      }
+      if (bgmAudioCtx && bgmAudioCtx.state === 'suspended') {
+        await bgmAudioCtx.resume();
+      }
+
+      try {
+        await bgmAudio.play();
+        fadeInBgm(6000);
+      } catch (err) {
+        console.warn('BGM playback blocked by browser:', err);
+      }
+    }
+
+    function closeBgmPrompt() {
+      if (bgmPrompt) {
+        bgmPrompt.classList.add('hidden');
+      }
+    }
+
+    function handleBgmChoice(enabled) {
+      closeBgmPrompt();
+      if (enabled) {
+        localStorage.setItem('bgmEnabled', 'true');
+        startBgmPlayback();
+      } else {
+        localStorage.setItem('bgmEnabled', 'false');
+      }
+    }
+
+    bgmOnBtn?.addEventListener('click', () => handleBgmChoice(true));
+    bgmOffBtn?.addEventListener('click', () => handleBgmChoice(false));
 
     enterLink.addEventListener('click', function(e) {
       e.preventDefault(); // 本来のリンク移動を一旦止める
