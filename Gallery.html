@@ -984,13 +984,23 @@
     document.addEventListener('DOMContentLoaded', () => {
       const bgmAudio = document.getElementById('bgm-audio');
       if (localStorage.getItem('bgmEnabled') === 'true') {
-        bgmAudio.volume = 0.1;
-        const playBgm = () => {
-          bgmAudio.play().then(() => {
-            ['click', 'touchstart', 'wheel'].forEach(type => document.removeEventListener(type, playBgm));
-          }).catch(e => console.log("BGM Playback auto-start blocked:", e));
-        };
-        ['click', 'touchstart', 'wheel'].forEach(type => document.addEventListener(type, playBgm));
+        bgmAudio.volume = 0.1; // Set initial volume
+
+        // Attempt to play immediately
+        bgmAudio.play().then(() => {
+          console.log("BGM started successfully on Gallery.html");
+        }).catch(e => {
+          console.log("BGM auto-start blocked on Gallery.html, waiting for user interaction:", e);
+          // If autoplay is blocked, set up listeners for user interaction
+          const playBgmOnInteraction = () => {
+            bgmAudio.play().then(() => {
+              console.log("BGM started by user interaction on Gallery.html");
+              // Remove listeners once playback starts
+              ['click', 'touchstart', 'wheel'].forEach(type => document.removeEventListener(type, playBgmOnInteraction));
+            }).catch(err => console.log("BGM Playback failed even with interaction on Gallery.html:", err));
+          };
+          ['click', 'touchstart', 'wheel'].forEach(type => document.addEventListener(type, playBgmOnInteraction));
+        });
       }
     });
   </script>
