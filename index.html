@@ -312,19 +312,21 @@
       }
     }
 
-    function fadeInBgm(durationMs = 6000) {
+    function fadeInBgm(durationMs = 1500) {
+      const targetVolume = 0.2;
       if (bgmGain && bgmAudioCtx) {
         const now = bgmAudioCtx.currentTime;
         bgmGain.gain.cancelScheduledValues(now);
         bgmGain.gain.setValueAtTime(0, now);
-        bgmGain.gain.linearRampToValueAtTime(0.1, now + durationMs / 1000);
+        bgmGain.gain.linearRampToValueAtTime(targetVolume, now + durationMs / 1000);
       } else {
         bgmAudio.volume = 0;
-        const step = 0.02;
+        const steps = 20;
+        const stepVolume = targetVolume / steps;
         const interval = setInterval(() => {
-          bgmAudio.volume = Math.min(bgmAudio.volume + step, 0.1);
-          if (bgmAudio.volume >= 0.1) clearInterval(interval);
-        }, durationMs / 15);
+          bgmAudio.volume = Math.min(bgmAudio.volume + stepVolume, targetVolume);
+          if (bgmAudio.volume >= targetVolume) clearInterval(interval);
+        }, durationMs / steps);
       }
     }
 
@@ -338,9 +340,10 @@
 
       try {
         await bgmAudio.play();
-        fadeInBgm(6000);
+        fadeInBgm(1500);
+        console.log("BGM Loaded");
       } catch (err) {
-        console.warn('BGM playback blocked by browser:', err);
+        console.error("BGM Error:", err);
       }
     }
 
