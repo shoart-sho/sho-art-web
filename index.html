@@ -265,7 +265,7 @@
     </a>
   </div>
 
-  <audio id="bgm-audio" src="BGM.mp3" preload="auto" loop></audio>
+  <audio id="bgm-audio" src="bgm.mp3" preload="auto" loop></audio>
 
   <div id="bgm-prompt" class="bgm-prompt">
     <div class="bgm-prompt-card">
@@ -292,58 +292,32 @@
     const bgmOnBtn = document.getElementById('bgm-on');
     const bgmOffBtn = document.getElementById('bgm-off');
 
-    let bgmAudioCtx = null;
-    let bgmGain = null;
-
-    function initBgm() {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      if (!AudioContext) return;
-
-      bgmAudioCtx = new AudioContext();
-      try {
-        const source = bgmAudioCtx.createMediaElementSource(bgmAudio);
-        bgmGain = bgmAudioCtx.createGain();
-        bgmGain.gain.value = 0;
-        source.connect(bgmGain).connect(bgmAudioCtx.destination);
-      } catch (error) {
-        console.warn('Web Audio API initialization failed:', error);
-        bgmAudioCtx = null;
-        bgmGain = null;
-      }
-    }
-
-    function fadeInBgm(durationMs = 1500) {
-      const targetVolume = 0.2;
-      if (bgmGain && bgmAudioCtx) {
-        const now = bgmAudioCtx.currentTime;
-        bgmGain.gain.cancelScheduledValues(now);
-        bgmGain.gain.setValueAtTime(0, now);
-        bgmGain.gain.linearRampToValueAtTime(targetVolume, now + durationMs / 1000);
-      } else {
-        bgmAudio.volume = 0;
-        const steps = 20;
-        const stepVolume = targetVolume / steps;
-        const interval = setInterval(() => {
-          bgmAudio.volume = Math.min(bgmAudio.volume + stepVolume, targetVolume);
-          if (bgmAudio.volume >= targetVolume) clearInterval(interval);
-        }, durationMs / steps);
-      }
+    function fadeInBgm(audio, durationMs = 1500, targetVol = 0.2) {
+      audio.volume = 0;
+      const steps = 30;
+      const stepTime = durationMs / steps;
+      const stepVol = targetVol / steps;
+      const interval = setInterval(() => {
+        audio.volume = Math.min(audio.volume + stepVol, targetVol);
+        if (audio.volume >= targetVol) clearInterval(interval);
+      }, stepTime);
     }
 
     async function startBgmPlayback() {
-      if (!bgmAudioCtx && (window.AudioContext || window.webkitAudioContext)) {
-        initBgm();
-      }
-      if (bgmAudioCtx && bgmAudioCtx.state === 'suspended') {
-        await bgmAudioCtx.resume();
-      }
-
       try {
+        bgmAudio.volume = 0;
         await bgmAudio.play();
-        fadeInBgm(1500);
+        fadeInBgm(bgmAudio, 1500, 0.2);
         console.log("BGM Loaded");
       } catch (err) {
         console.error("BGM Error:", err);
+        // 自動再生制限がかかった場合の予備：クリック時に再生
+        const playOnce = () => {
+          bgmAudio.play().then(() => fadeInBgm(bgmAudio)).finally(() => {
+            document.removeEventListener('click', playOnce);
+          });
+        };
+        document.addEventListener('click', playOnce);
       }
     }
 

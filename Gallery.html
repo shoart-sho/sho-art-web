@@ -917,7 +917,7 @@
 
   </main>
 
-  <audio id="bgm-audio" src="bgm.mp3" preload="auto" loop></audio>
+  <audio id="bgm-audio" src="BGM.mp3" preload="auto" loop></audio>
 
   <!-- 画像拡大用モーダル -->
   <div id="image-modal">
@@ -1010,10 +1010,10 @@
               fadeInBgm(bgmAudio);
               console.log("BGM Loaded");
               // Remove listeners once playback starts
-              ['click', 'touchstart', 'wheel'].forEach(type => document.removeEventListener(type, playBgmOnInteraction));
+              ['click', 'touchstart', 'mousedown', 'keydown'].forEach(type => document.removeEventListener(type, playBgmOnInteraction));
             }).catch(err => console.error("BGM Error:", err));
           };
-          ['click', 'touchstart', 'wheel'].forEach(type => document.addEventListener(type, playBgmOnInteraction));
+          ['click', 'touchstart', 'mousedown', 'keydown'].forEach(type => document.addEventListener(type, playBgmOnInteraction));
         });
       }
     });
