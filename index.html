@@ -292,53 +292,39 @@
     const bgmOnBtn = document.getElementById('bgm-on');
     const bgmOffBtn = document.getElementById('bgm-off');
 
-    function fadeInBgm(audio, durationMs = 1500, targetVol = 0.2) {
+    // 音量フェードイン関数
+    const fadeIn = (audio) => {
+      let vol = 0;
       audio.volume = 0;
-      const steps = 30;
-      const stepTime = durationMs / steps;
-      const stepVol = targetVol / steps;
       const interval = setInterval(() => {
-        audio.volume = Math.min(audio.volume + stepVol, targetVol);
-        if (audio.volume >= targetVol) clearInterval(interval);
-      }, stepTime);
-    }
+        vol += 0.01;
+        if (vol >= 0.2) {
+          audio.volume = 0.2;
+          clearInterval(interval);
+        } else {
+          audio.volume = vol;
+        }
+      }, 50);
+    };
 
-    async function startBgmPlayback() {
-      try {
-        bgmAudio.volume = 0;
-        await bgmAudio.play();
-        fadeInBgm(bgmAudio, 1500, 0.2);
-        console.log("BGM Loaded");
-      } catch (err) {
-        console.error("BGM Error:", err);
-        // 自動再生制限がかかった場合の予備：クリック時に再生
-        const playOnce = () => {
-          bgmAudio.play().then(() => fadeInBgm(bgmAudio)).finally(() => {
-            document.removeEventListener('click', playOnce);
-          });
-        };
-        document.addEventListener('click', playOnce);
-      }
-    }
-
-    function closeBgmPrompt() {
-      if (bgmPrompt) {
-        bgmPrompt.classList.add('hidden');
-      }
-    }
-
-    function handleBgmChoice(enabled) {
-      closeBgmPrompt();
-      if (enabled) {
+    // BGM選択の処理（iOS対策：イベント内で直接playを呼ぶ）
+    const setupBgm = (enable) => {
+      if (enable) {
         localStorage.setItem('bgmEnabled', 'true');
-        startBgmPlayback();
+        bgmAudio.play()
+          .then(() => fadeIn(bgmAudio))
+          .catch(err => console.error("Audio playback failed:", err));
       } else {
         localStorage.setItem('bgmEnabled', 'false');
       }
-    }
+      bgmPrompt.classList.add('hidden');
+    };
 
-    bgmOnBtn?.addEventListener('click', () => handleBgmChoice(true));
-    bgmOffBtn?.addEventListener('click', () => handleBgmChoice(false));
+    // iOSのレスポンス向上のため click と touchstart の両方をセット
+    ['click', 'touchstart'].forEach(type => {
+      bgmOnBtn?.addEventListener(type, (e) => { e.preventDefault(); setupBgm(true); }, { once: true });
+      bgmOffBtn?.addEventListener(type, (e) => { e.preventDefault(); setupBgm(false); }, { once: true });
+    });
 
     enterLink.addEventListener('click', function(e) {
       e.preventDefault(); // 本来のリンク移動を一旦止める

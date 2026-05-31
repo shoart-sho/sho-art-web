@@ -922,7 +922,7 @@
         <p class="art-subtitle">Inevitable Sorrow</p>
         <p class="art-year">2026</p>
         <div class="art-comment">
-          <p>高鳴る鼓動が病まない</p>
+          <p>高鳴る鼓動が病まない </p>
         </div>
         <nav class="thumbnails">
           <!-- JSで自動生成 -->
@@ -1020,39 +1020,36 @@
     /* --- BGM再生（index.htmlの設定を継承） --- */
     document.addEventListener('DOMContentLoaded', () => {
       const bgmAudio = document.getElementById('bgm-audio');
+      if (localStorage.getItem('bgmEnabled') !== 'true') return;
 
-      function fadeInBgm(audio, durationMs = 1500, targetVol = 0.2) {
-        audio.volume = 0;
-        const steps = 30;
-        const stepTime = durationMs / steps;
-        const stepVol = targetVol / steps;
-        const interval = setInterval(() => {
-          audio.volume = Math.min(audio.volume + stepVol, targetVol);
-          if (audio.volume >= targetVol) clearInterval(interval);
-        }, stepTime);
-      }
-
-      if (localStorage.getItem('bgmEnabled') === 'true') {
+      const fadeIn = () => {
+        let vol = 0;
         bgmAudio.volume = 0;
+        const interval = setInterval(() => {
+          vol += 0.01;
+          if (vol >= 0.2) {
+            bgmAudio.volume = 0.2;
+            clearInterval(interval);
+          } else {
+            bgmAudio.volume = vol;
+          }
+        }, 50);
+      };
 
-        // Attempt to play immediately
+      const handleUserInteraction = () => {
         bgmAudio.play().then(() => {
-          fadeInBgm(bgmAudio);
-          console.log("BGM Loaded");
-        }).catch(e => {
-          console.error("BGM Error:", e);
-          // If autoplay is blocked, set up listeners for user interaction
-          const playBgmOnInteraction = () => {
-            bgmAudio.play().then(() => {
-              fadeInBgm(bgmAudio);
-              console.log("BGM Loaded");
-              // Remove listeners once playback starts
-              ['click', 'touchstart', 'mousedown', 'keydown'].forEach(type => document.removeEventListener(type, playBgmOnInteraction));
-            }).catch(err => console.error("BGM Error:", err));
-          };
-          ['click', 'touchstart', 'mousedown', 'keydown'].forEach(type => document.addEventListener(type, playBgmOnInteraction));
-        });
-      }
+          fadeIn();
+          // 一度再生されたらリスナーを解除
+          ['click', 'touchstart', 'keydown', 'wheel'].forEach(type => 
+            document.removeEventListener(type, handleUserInteraction));
+        }).catch(() => { /* ユーザー操作前は失敗して良い */ });
+      };
+
+      // PC等の自動再生許可環境向けに一度試行
+      handleUserInteraction();
+      // iOS向け：最初の操作を待機
+      ['click', 'touchstart', 'keydown', 'wheel'].forEach(type => 
+        document.addEventListener(type, handleUserInteraction));
     });
   </script>
 </body>
